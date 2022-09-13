@@ -23,4 +23,8 @@
     <Folder Include="Services\" />
     <Folder Include="Interfaces\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SudokuLib\SudokuLib.csproj" />
+  </ItemGroup>
 </Project>
