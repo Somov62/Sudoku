@@ -14,4 +14,14 @@
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2515" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UI\Themes\" />
+    <Folder Include="UI\Controls\" />
+    <Folder Include="UI\Styles\" />
+    <Folder Include="ViewModels\Base\" />
+    <Folder Include="Views\" />
+    <Folder Include="Services\" />
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
 </Project>
