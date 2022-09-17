@@ -1,15 +1,16 @@
-﻿using System;
+﻿using SudokuLib.Entities;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
-namespace SudokuLib
+namespace SudokuLib.GeneratorTools
 {
     internal class Generator
     {
         private int _countSetNumbers;
-        private Chunk[,] _chunks;
         private int[,] _rawMatrixData;
-        private readonly Random _rnd = new();
+        private readonly Random _rnd = SigletonRandom.GetInstance();
 
         public Generator() { }
 
@@ -36,21 +37,19 @@ namespace SudokuLib
         /// <param name="countChunksInDimension">Количество чанков в одном измерении</param>
         /// <param name="difficultyLevel">Уровень сложности 0-4</param>
         /// <returns></returns>
-        public Chunk[,] GenerateSudoku(int countChunksInDimension, int difficultyLevel)
+        public int[,] GenerateSudoku(int countChunksInDimension, int difficultyLevel)
         {
             if (countChunksInDimension < 3) countChunksInDimension = 3;
             ChunkSize = countChunksInDimension;
 
-            Chunk[,] chunks = null;
-
+            int[,] chunks = null;
             while (chunks == null)
             {
                 chunks = Generate();
             }
-
             return chunks;
 
-            Chunk[,] Generate()
+            int[,] Generate()
             {
                 int countNumbers = countChunksInDimension * countChunksInDimension;
                 _rawMatrixData = new int[countNumbers, countNumbers];
@@ -65,11 +64,44 @@ namespace SudokuLib
                     if (SetNumber(item) == false) return null;
                 }
 
-                _chunks = PackInChunks();
+                for (int i = 0; i < 9; i++)
+                {
+                    if (i % 3 == 0) Debug.WriteLine("");
+                    for (int j = 0; j < 9; j++)
+                    {
+                        if (j % 3 == 0) Debug.Write(" ");
+                        //if (matrix1[i, j] == 0)
+                        //{
+                        //    Console.Write(" ");
+                        //    continue;
+                        //}
+                        Debug.Write(_rawMatrixData[i, j]);
+                    }
+                    Debug.WriteLine("");
+                }
 
-                DeleteNumbers(difficultyLevel);
 
-                return _chunks;
+                MatrixCleaner cleaner = new MatrixCleaner();
+                cleaner.DeleteNumbers(_rawMatrixData, difficultyLevel);
+
+                for (int i = 0; i < 9; i++)
+                {
+                    if (i % 3 == 0) Debug.WriteLine("");
+                    for (int j = 0; j < 9; j++)
+                    {
+                        if (j % 3 == 0) Debug.Write(" ");
+                        //if (matrix1[i, j] == 0)
+                        //{
+                        //    Console.Write(" ");
+                        //    continue;
+                        //}
+                        Debug.Write(_rawMatrixData[i, j]);
+                    }
+                    Debug.WriteLine("");
+                }
+
+
+                return _rawMatrixData;
             }
         }
 
@@ -326,7 +358,7 @@ namespace SudokuLib
 
                     for (int row = chunkRow; row < chunkRow + ChunkSize; row++)
                     {
-                        if (row == i) 
+                        if (row == i)
                             continue;
                         if (GetCount0InRow(row) > 1)
                         {
@@ -385,102 +417,8 @@ namespace SudokuLib
             secondVar = container;
         }
 
-        /// <summary>
-        /// Упаковка матрицы чисел в матрицу чанков
-        /// </summary>
-        /// <returns>Матрица чанков</returns>
-        private Chunk[,] PackInChunks()
-        {
-            Chunk[,] chunks = new Chunk[ChunkSize, ChunkSize];
+       
 
-            for (int j = 0; j < ChunkSize; j++)
-                for (int i = 0; i < ChunkSize; i++)
-                    chunks[i, j] = PackInChunk(i * ChunkSize, j * ChunkSize);
-            return chunks;
-
-            Chunk PackInChunk(int chunkRow, int chunkColumn)
-            {
-                Chunk chunk = new Chunk(ChunkSize);
-                for (int j = 0; j < ChunkSize; j++)
-                    for (int i = 0; i < ChunkSize; i++)
-                    {
-                        chunk[i, j].Value = _rawMatrixData[i + chunkRow, j + chunkColumn];
-                        chunk[i, j].UserValue = _rawMatrixData[i + chunkRow, j + chunkColumn];
-                    }
-
-                return chunk;
-            }
-        }
-
-        /// <summary>
-        /// Сокрытие части цифр, которые пользователь будет ставить
-        /// </summary>
-        /// <param name="difficultyLevel">Уровень сложности 0-4</param>
-        private void DeleteNumbers(int difficultyLevel)
-        {
-            //Количество цифр для удаления
-            double countNumbersForDelete = Math.Pow(ChunkSize, 4);
-            countNumbersForDelete *= difficultyLevel switch
-            {
-                1 => 0.2,
-                2 => 0.4,
-                3 => 0.6,
-                4 => 0.7,
-                _ => 0.1,
-            };
-            Math.Floor(countNumbersForDelete);
-
-            while (countNumbersForDelete > 0)
-            {
-                //Получения случайных координат в матрице
-                int chunkRow = _rnd.Next(ChunkSize);
-                int chunkColumn = _rnd.Next(ChunkSize);
-                int numberRow = _rnd.Next(ChunkSize);
-                int numberColumn = _rnd.Next(ChunkSize);
-
-                //Получение числа из этих координат
-                var number = _chunks[chunkRow, chunkColumn][numberRow, numberColumn];
-
-                //Если число уже скрыто - пропускаем
-                if (number.IsHidden) continue;
-
-                //Детектим и запрещаем скрывать все числа в строке, столбце, чанке
-                if (GetCountDeleteInChunk(chunkRow, chunkColumn) == ChunkSize * ChunkSize - 1) continue;
-                if (GetCountDeleteInColumn(chunkColumn, numberColumn) == ChunkSize * ChunkSize - 1) continue;
-                if (GetCountDeleteInRow(chunkRow, numberRow) == ChunkSize * ChunkSize - 1) continue;
-
-                //Скрываем число
-                number.IsHidden = true;
-                number.UserValue = 0;
-                countNumbersForDelete--;
-            }
-        }
-
-        private int GetCountDeleteInRow(int chunkRow, int numberRow)
-        {
-            int count = 0;
-            for (int chunkColumn = 0; chunkColumn < ChunkSize; chunkColumn++)
-                for (int numberColumn = 0; numberColumn < ChunkSize; numberColumn++)
-                    if (_chunks[chunkRow, chunkColumn][numberRow, numberColumn].IsHidden) count++;
-            return count;
-        }
-
-        private int GetCountDeleteInColumn(int chunkColumn, int numberColumn)
-        {
-            int count = 0;
-            for (int chunkRow = 0; chunkRow < ChunkSize; chunkRow++)
-                for (int numberRow = 0; numberRow < ChunkSize; numberRow++)
-                    if (_chunks[chunkRow, chunkColumn][numberRow, numberColumn].IsHidden) count++;
-            return count;
-        }
-
-        private int GetCountDeleteInChunk(int chunkRow, int chunkColumn)
-        {
-            int count = 0;
-            for (int numberColumn = 0; numberColumn < ChunkSize; numberColumn++)
-                for (int numberRow = 0; numberRow < ChunkSize; numberRow++)
-                    if (_chunks[chunkRow, chunkColumn][numberRow, numberColumn].IsHidden) count++;
-            return count;
-        }
+       
     }
 }

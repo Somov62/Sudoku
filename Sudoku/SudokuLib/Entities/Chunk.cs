@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 
-namespace SudokuLib
+namespace SudokuLib.Entities
 {
     public class Chunk
     {
@@ -33,12 +33,7 @@ namespace SudokuLib
             set => ChunkData[row * _size + column] = value;
         }
 
-        public bool Validate()
-        {
-            return ChunkData.Where(p => p.IsValid == false).Count() == 0;
-        }
-
-        public int OpenedDigitsCount()
+        internal int FreeSeatsCount()
         {
             return ChunkData.Where(p => p.Value == 0).Count();
         }

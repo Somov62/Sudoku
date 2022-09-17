@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SudokuLib.Realization_1;
+using SudokuLib.Entities;
+using SudokuLib.GeneratorTools;
 
 namespace SudokuLib
 {
@@ -10,29 +11,29 @@ namespace SudokuLib
         public Sudoku(int countChunksInDimension = 3, int difficultyLevel = 2)
         {
             CountChunksInDimension = countChunksInDimension;
-            ChunkMatrix = new Generator().GenerateSudoku(CountChunksInDimension, difficultyLevel);
-            ChunkList = MatrixToList();
+            Matrix = new Generator().GenerateSudoku(CountChunksInDimension, difficultyLevel);
+
+            ChunksArchiver archiver = new();
+            Chunks = archiver.PackInChunks(Matrix);
         }
         public int CountChunksInDimension { get; set; }
-        public Chunk[,] ChunkMatrix { get; set; }
-        public List<Chunk> ChunkList { get; set; }
+        public int[,] Matrix { get; set; }
+        public List<Chunk> Chunks { get; set; }
+
+        public int FreeSeatsCount()
+        {
+            int count = 0;
+            foreach (var item in Chunks)
+            {
+                count += item.FreeSeatsCount();
+            }
+            return count;
+        }
 
         public bool Validate()
         {
-            return ChunkList.Where(p => p.Validate() == false).Count() == 0;
-        }
-
-        private List<Chunk> MatrixToList()
-        {
-            List<Chunk> list = new List<Chunk>(CountChunksInDimension * CountChunksInDimension);
-            for (int i = 0; i < CountChunksInDimension; i++)
-            {
-                for (int j = 0; j < CountChunksInDimension; j++)
-                {
-                    list.Add(ChunkMatrix[i, j]);
-                }
-            }
-            return list;
+            SudokuChecker checker = new();
+            return checker.ValidateSudoku(Chunks);
         }
     }
 }
