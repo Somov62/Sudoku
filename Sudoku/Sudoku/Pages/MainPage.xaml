@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Sudoku.Pages.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:fa="clr-namespace:Xamarin.Forms.FontAwesome.Controls;assembly=Xamarin.Forms.FontAwesome"
+    NavigationPage.HasNavigationBar="False">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+
+        <Grid Margin="0,20,0,0">
+            <Ellipse
+                WidthRequest="200"
+                HeightRequest="200"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Fill="Orange" />
+
+            <Line
+                Stroke="White"
+                StrokeThickness="12"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Margin="50,0,0,0"
+                StrokeLineCap="Round"
+                StrokeLineJoin="Round"
+                X1="0"
+                X2="0"
+                Y1="0"
+                Y2="150" />
+
+            <Line
+                Stroke="White"
+                StrokeThickness="12"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Margin="0,0,50,0"
+                StrokeLineCap="Round"
+                X1="0"
+                X2="0"
+                Y1="0"
+                Y2="150" />
+
+            <Line
+                Stroke="White"
+                StrokeThickness="12"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Margin="0,50,0,0"
+                StrokeLineCap="Round"
+                StrokeLineJoin="Round"
+                X1="0"
+                X2="150"
+                Y1="0"
+                Y2="0" />
+            <Line
+                Stroke="White"
+                StrokeThickness="12"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Margin="0,0,0,50"
+                StrokeLineCap="Round"
+                StrokeLineJoin="Round"
+                X1="0"
+                X2="150"
+                Y1="0"
+                Y2="0" />
+        </Grid>
+
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <fa:Icon
+                TextColor="Gray"
+                FontSize="26"
+                VerticalOptions="Center"
+                HorizontalOptions="End"
+                Padding="20,0"
+                FaName="angle-left"
+                FaStyle="Solid">
+                <fa:Icon.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding PreviousLevel}" />
+                </fa:Icon.GestureRecognizers>
+            </fa:Icon>
+            <fa:Icon
+                Grid.Column="2"
+                TextColor="Gray"
+                FontSize="26"
+                VerticalOptions="Center"
+                HorizontalOptions="Start"
+                Padding="20,0"
+                FaName="angle-right"
+                FaStyle="Solid">
+                <fa:Icon.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NextLevel}" />
+                </fa:Icon.GestureRecognizers>
+            </fa:Icon>
+            <CarouselView
+                x:Name="carouselView"
+                ItemsSource="{Binding Levels}"
+                Grid.Column="1"
+                WidthRequest="160"
+                HeightRequest="40"
+                HorizontalOptions="Center"
+                Loop="False"
+                Position="{Binding Level}">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Label
+                            Text="{Binding}"
+                            FontSize="20"
+                            HorizontalTextAlignment="Center"
+                            VerticalTextAlignment="Center" />
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+        </Grid>
+
+
+        <StackLayout
+            Grid.Row="2"
+            Margin="0,20">
+            <Button
+                Text="New game"
+                TextColor="Gray"
+                BackgroundColor="White"
+                FontSize="16"
+                HorizontalOptions="Center"
+                Padding="90,0"
+                BorderColor="Orange"
+                BorderWidth="1"
+                Command="{Binding ToSudokuPage}"
+                CornerRadius="20"
+                TextTransform="None" />
+        </StackLayout>
+    </Grid>
+</ContentPage>

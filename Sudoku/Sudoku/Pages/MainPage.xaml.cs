@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
-namespace Sudoku.Views
+namespace Sudoku.Pages
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SudokuPage : ContentPage
+    public partial class MainPage : ContentPage
     {
-        public SudokuPage()
+        public MainPage()
         {
             InitializeComponent();
         }
