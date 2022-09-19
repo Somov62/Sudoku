@@ -8,7 +8,9 @@ namespace SudokuLib.GeneratorTools
 
         public static Random GetInstance()
         {
-            return _random ??= new Random();
+            if (_random == null) 
+                _random = new Random();
+            return _random;
         }
     }
 }

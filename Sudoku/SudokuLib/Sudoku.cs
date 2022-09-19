@@ -13,7 +13,7 @@ namespace SudokuLib
             CountChunksInDimension = countChunksInDimension;
             Matrix = new Generator().GenerateSudoku(CountChunksInDimension, difficultyLevel);
 
-            ChunksArchiver archiver = new();
+            ChunksArchiver archiver = new ChunksArchiver();
             Chunks = archiver.PackInChunks(Matrix);
         }
         public int CountChunksInDimension { get; set; }
@@ -32,7 +32,7 @@ namespace SudokuLib
 
         public bool Validate()
         {
-            SudokuChecker checker = new();
+            SudokuChecker checker = new SudokuChecker();
             return checker.ValidateSudoku(Chunks);
         }
     }

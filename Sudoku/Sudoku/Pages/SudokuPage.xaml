@@ -16,7 +16,30 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <Grid BackgroundColor="Red" />
+            <Grid BackgroundColor="Red" >
+                <CollectionView>
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout
+                            Orientation="Vertical"
+                            SnapPointsAlignment="Center"
+                            SnapPointsType="Mandatory"
+                            Span="3" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <CollectionView>
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout
+                                        Orientation="Vertical"
+                                        SnapPointsAlignment="Center"
+                                        SnapPointsType="Mandatory"
+                                        Span="3" />
+                                </CollectionView.ItemsLayout>
+                            </CollectionView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
 
             <Grid Grid.Row="1">
                 <CollectionView

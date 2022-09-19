@@ -18,14 +18,25 @@ namespace SudokuLib.GeneratorTools
 
             //Количество цифр для удаления
             double countNumbersForDelete = matrix.Length;
-            countNumbersForDelete *= difficultyLevel switch
+            switch (difficultyLevel)
             {
-                1 => 0.2,
-                2 => 0.4,
-                3 => 0.6,
-                4 => 0.7,
-                _ => 0.1,
-            };
+                case 1:
+                    countNumbersForDelete *= 0.2;
+                    break;
+                case 2:
+                    countNumbersForDelete *= 0.4;
+                    break;
+                case 3:
+                    countNumbersForDelete *= 0.6;
+                    break;
+                case 4:
+                    countNumbersForDelete *= 0.7;
+                    break;
+                default:
+                    countNumbersForDelete *= 0.1;
+                    break;
+            }
+
             Math.Floor(countNumbersForDelete);
 
             int[,] filledMatrix = new int[matrix.GetLength(0), matrix.GetLength(1)];

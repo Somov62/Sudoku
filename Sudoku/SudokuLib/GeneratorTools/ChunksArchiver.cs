@@ -15,7 +15,7 @@ namespace SudokuLib.GeneratorTools
             if (matrix.GetLength(0) != matrix.GetLength(1)) return null;
             int chunkSize = (int)Math.Sqrt(matrix.GetLength(0));
 
-            List<Chunk> chunks = new (chunkSize * chunkSize);
+            List<Chunk> chunks = new List<Chunk>(chunkSize * chunkSize);
 
             for (int i = 0; i < chunkSize; i++)
                 for (int j = 0; j < chunkSize; j++)

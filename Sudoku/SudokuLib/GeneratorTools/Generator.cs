@@ -195,7 +195,7 @@ namespace SudokuLib.GeneratorTools
         /// <returns>Коллекцию координат</returns>
         private List<(int, int)> GetFreePlaces(int number, int chunkRow, int chunkColumn)
         {
-            List<(int, int)> list = new();
+            List<(int, int)> list = new List<(int, int)>();
             for (int i = chunkRow; i < chunkRow + ChunkSize; i++)
             {
                 for (int j = chunkColumn; j < chunkColumn + ChunkSize; j++)

@@ -18,7 +18,11 @@ namespace Sudoku.PageModels
             Numbers = Enumerable.Range(1, 9).ToList();
         }
 
+        public SudokuLib.Sudoku MyProperty { get; set; }
+
         public List<int> Numbers { get; set; }
+
+
 
         private string _selectNumber;
         public string SelectNumber
