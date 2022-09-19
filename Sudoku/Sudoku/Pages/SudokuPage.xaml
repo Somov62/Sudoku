@@ -2,8 +2,74 @@
 <ContentPage
     x:Class="Sudoku.Pages.SudokuPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <Grid />
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid
+                BackgroundColor="Red">
+                
+            </Grid>
+
+            <Grid
+                Grid.Row="1">
+                <CollectionView
+                    Margin="20"
+                    HorizontalOptions="Center"
+                    ItemsSource="{Binding Numbers}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" SnapPointsType="Mandatory" SnapPointsAlignment="Center" Span="5" VerticalItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center">
+                                
+                                <Frame
+                                    Padding="0"
+                                    Margin="0, 3"
+                                    HorizontalOptions="Center"
+                                    CornerRadius="100"
+                                    BackgroundColor="Orange" 
+                                    WidthRequest="{Binding Path=Height, Source={RelativeSource Mode=Self}}"
+                                    >
+                                    <Frame
+                                        CornerRadius="100"
+                                        Margin="3"
+                                        Padding="0">
+                                        <Button 
+                                            Text="{Binding }"
+                                            Margin="-5"
+                                            Padding="5"
+                                            BackgroundColor="White"
+                                            Command="{Binding SelectNumberCommand}"
+                                            CommandParameter="{Binding Text, Source={RelativeSource Mode=Self}}"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Center"
+                                            FontSize="20"
+                                            TextColor="Black">
+                                            <Button.Triggers>
+                                                <DataTrigger TargetType="Button" Binding="{Binding Text, Source={RelativeSource Mode=Self}}" Value="{Binding SelectNumber}">
+                                                    <Setter Property="BackgroundColor" Value="Orange" />
+                                                </DataTrigger>
+                                            </Button.Triggers>
+                                        </Button>
+                                    </Frame>
+                                </Frame>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+            
+            
+            
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

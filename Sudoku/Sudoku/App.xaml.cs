@@ -10,7 +10,7 @@ namespace Sudoku
         public App()
         {
             InitializeComponent();
-            var mainPage = FreshPageModelResolver.ResolvePageModel<PageModels.MainPageModel>();
+            var mainPage = FreshPageModelResolver.ResolvePageModel<PageModels.SudokuPageModel>();
             var navigationPage = new FreshNavigationContainer(mainPage);
             MainPage = navigationPage;
         }
