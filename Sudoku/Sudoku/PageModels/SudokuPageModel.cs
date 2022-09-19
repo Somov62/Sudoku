@@ -14,14 +14,14 @@ namespace Sudoku.PageModels
 
         public SudokuPageModel()
         {
-            SelectNumberCommand = new Command((object value) => SelectNumber = Convert.ToInt32(value));
+            SelectNumberCommand = new Command((object value) => SelectNumber = Convert.ToInt32(value).ToString());
             Numbers = Enumerable.Range(1, 9).ToList();
         }
 
         public List<int> Numbers { get; set; }
 
-        private int _selectNumber;
-        public int SelectNumber
+        private string _selectNumber;
+        public string SelectNumber
         {
             get => _selectNumber;
             set
