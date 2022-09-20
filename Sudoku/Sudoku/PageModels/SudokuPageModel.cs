@@ -16,9 +16,10 @@ namespace Sudoku.PageModels
         {
             SelectNumberCommand = new Command((object value) => SelectNumber = Convert.ToInt32(value).ToString());
             Numbers = Enumerable.Range(1, 9).ToList();
+            Sudoku = new SudokuLib.Sudoku(3, 2);
         }
 
-        public SudokuLib.Sudoku MyProperty { get; set; }
+        public SudokuLib.Sudoku Sudoku { get; set; }
 
         public List<int> Numbers { get; set; }
 

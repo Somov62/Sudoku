@@ -4,105 +4,208 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:converters="clr-namespace:Sudoku.UI.Converters"
+    Appearing="ContentPage_Appearing"
+    BackgroundColor="White"
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Resources>
         <converters:NumbersButtonConverter x:Key="NumbersButtonConverter" />
+        <converters:CollectionViewHeightConverter x:Key="CollectionViewHeightConverter" />
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="3*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
 
-            <Grid BackgroundColor="Red" >
-                <CollectionView>
-                    <CollectionView.ItemsLayout>
-                        <GridItemsLayout
-                            Orientation="Vertical"
-                            SnapPointsAlignment="Center"
-                            SnapPointsType="Mandatory"
-                            Span="3" />
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <CollectionView>
-                                <CollectionView.ItemsLayout>
-                                    <GridItemsLayout
-                                        Orientation="Vertical"
-                                        SnapPointsAlignment="Center"
-                                        SnapPointsType="Mandatory"
-                                        Span="3" />
-                                </CollectionView.ItemsLayout>
-                            </CollectionView>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </Grid>
+        <StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-            <Grid Grid.Row="1">
-                <CollectionView
-                    x:Name="collectionView"
-                    ItemsSource="{Binding Numbers}"
-                    HorizontalOptions="Center"
-                    Margin="20">
-                    <CollectionView.ItemsLayout>
-                        <GridItemsLayout
-                            Orientation="Vertical"
-                            SnapPointsAlignment="Center"
-                            SnapPointsType="Mandatory"
-                            Span="5"
-                            VerticalItemSpacing="10" />
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <StackLayout
-                                VerticalOptions="Center"
-                                HorizontalOptions="Center">
+                <Label
+                    x:Name="viewChunkSize"
+                    Text="{Binding Sudoku.CountChunksInDimension}"
+                    HeightRequest="0"
+                    IsVisible="false" />
+                <Grid VerticalOptions="Center">
+                    <CollectionView
+                        x:Name="numberCV"
+                        ItemsSource="{Binding Sudoku.Chunks}"
+                        Margin="-3,0,0,0"
+                        SizeChanged="CollectionView_SizeChanged">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout
+                                Orientation="Vertical"
+                                SnapPointsAlignment="Center"
+                                SnapPointsType="Mandatory"
+                                Span="{Binding BindingContext.Sudoku.CountChunksInDimension, Source={Reference numberCV}}" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <CollectionView
+                                        x:Name="innerCV"
+                                        ItemsSource="{Binding ChunkData}"
+                                        WidthRequest="{Binding Height, Source={Reference numberCV}, Converter={StaticResource CollectionViewHeightConverter}, ConverterParameter={Reference viewChunkSize}}"
+                                        HeightRequest="{Binding Height, Source={Reference numberCV}, Converter={StaticResource CollectionViewHeightConverter}, ConverterParameter={Reference viewChunkSize}}"
+                                        VerticalOptions="Start"
+                                        Margin="2,1,0,0">
+                                        <CollectionView.ItemsLayout>
+                                            <GridItemsLayout
+                                                Orientation="Vertical"
+                                                SnapPointsAlignment="Center"
+                                                SnapPointsType="Mandatory"
+                                                Span="{Binding BindingContext.Sudoku.CountChunksInDimension, Source={Reference numberCV}}" />
+                                        </CollectionView.ItemsLayout>
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid
+                                                    WidthRequest="{Binding Height, Source={Reference innerCV}, Converter={StaticResource CollectionViewHeightConverter}, ConverterParameter={Reference viewChunkSize}}"
+                                                    HeightRequest="{Binding Height, Source={Reference innerCV}, Converter={StaticResource CollectionViewHeightConverter}, ConverterParameter={Reference viewChunkSize}}"
+                                                    VerticalOptions="Center"
+                                                    HorizontalOptions="Center">
+                                                    <Frame
+                                                        BackgroundColor="Orange"
+                                                        HeightRequest="{Binding Path=Width, Source={RelativeSource Mode=Self}}"
+                                                        HorizontalOptions="Center"
+                                                        Margin="3"
+                                                        Padding="0"
+                                                        CornerRadius="100">
 
-                                <Frame
-                                    BackgroundColor="Orange"
-                                    WidthRequest="{Binding Path=Height, Source={RelativeSource Mode=Self}}"
-                                    HorizontalOptions="Center"
-                                    Margin="0,3"
-                                    Padding="0"
-                                    CornerRadius="100">
+                                                        <Button
+                                                            x:Name="asasd"
+                                                            Text="{Binding Value}"
+                                                            TextColor="Black"
+                                                            BackgroundColor="White"
+                                                            FontSize="{Binding Height, Source={RelativeSource Mode=Self}}"
+                                                            VerticalOptions="Center"
+                                                            HorizontalOptions="Center"
+                                                            Margin="-5"
+                                                            Padding="5"
+                                                            Command="{Binding BindingContext.SelectNumberCommand, Source={Reference numberCV}}"
+                                                            CommandParameter="{Binding Text, Source={RelativeSource Mode=Self}}">
+                                                            <Button.Triggers>
+                                                                <DataTrigger
+                                                                    Binding="{Binding Path=BindingContext.SelectNumber, Source={Reference numberCV}, Converter={StaticResource NumbersButtonConverter}, ConverterParameter={Reference asasd}}"
+                                                                    TargetType="Button"
+                                                                    Value="true">
+                                                                    <Setter Property="BackgroundColor" Value="Orange" />
+                                                                </DataTrigger>
+                                                                <DataTrigger TargetType="Button" Binding="{Binding IsDefault}" Value="false">
+                                                                    <Setter Property="TextColor" Value="{Binding BackgroundColor, Source={Reference asasd}}" />
+                                                                </DataTrigger>
+                                                                <MultiTrigger TargetType="Button">
+                                                                    <MultiTrigger.Conditions>
+                                                                        <BindingCondition Binding="{Binding Path=BindingContext.SelectNumber, Source={Reference numberCV}, Converter={StaticResource NumbersButtonConverter}, ConverterParameter={Reference asasd}}" Value="true"/>
+                                                                        <BindingCondition Binding="{Binding Value}" Value="0"/>
+                                                                    </MultiTrigger.Conditions>
+                                                                    <MultiTrigger.Setters>
+                                                                        <Setter Property="BackgroundColor" TargetName="asasd" Value="White" />
+                                                                    </MultiTrigger.Setters>
+                                                                </MultiTrigger>
+                                                            </Button.Triggers>
+                                                        </Button>
+                                                    </Frame>
+                                                    <BoxView
+                                                        BackgroundColor="Black"
+                                                        HeightRequest="1"
+                                                        VerticalOptions="Start"
+                                                        Margin="5,0" />
+                                                    <BoxView
+                                                        BackgroundColor="Black"
+                                                        WidthRequest="1"
+                                                        HorizontalOptions="Start"
+                                                        Margin="0,5" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+
+
+                                    <BoxView
+                                        BackgroundColor="Black"
+                                        HeightRequest="3"
+                                        VerticalOptions="Start"
+                                        Margin="0" />
+                                    <BoxView
+                                        BackgroundColor="Black"
+                                        WidthRequest="3"
+                                        HorizontalOptions="Start"
+                                        Margin="0,-4" />
+                                </Grid>
+
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <BoxView
+                        BackgroundColor="White"
+                        HeightRequest="3"
+                        VerticalOptions="Start"
+                        HorizontalOptions="Fill" />
+                </Grid>
+
+                <StackLayout Grid.Row="1">
+                    <CollectionView
+                        x:Name="collectionView"
+                        ItemsSource="{Binding Numbers}"
+                        BackgroundColor="Black"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Margin="20">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout
+                                Orientation="Vertical"
+                                SnapPointsAlignment="Center"
+                                SnapPointsType="Mandatory"
+                                Span="5"
+                                VerticalItemSpacing="10" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center">
+
                                     <Frame
-                                        Margin="3"
+                                        BackgroundColor="Orange"
+                                        WidthRequest="{Binding Path=Height, Source={RelativeSource Mode=Self}}"
+                                        HorizontalOptions="Center"
+                                        Margin="0,3"
                                         Padding="0"
                                         CornerRadius="100">
-                                        <Button
-                                            x:Name="asasd"
-                                            Text="{Binding}"
-                                            TextColor="Black"
-                                            BackgroundColor="White"
-                                            FontSize="20"
-                                            VerticalOptions="Center"
-                                            HorizontalOptions="Center"
-                                            Margin="-5"
-                                            Padding="5"
-                                            Command="{Binding BindingContext.SelectNumberCommand, Source={Reference collectionView}}"
-                                            CommandParameter="{Binding Text, Source={RelativeSource Mode=Self}}">
-                                            <Button.Triggers>
-                                                <DataTrigger
-                                                    Binding="{Binding Path=BindingContext.SelectNumber, Source={Reference collectionView}, Converter={StaticResource NumbersButtonConverter}, ConverterParameter={Reference asasd}}"
-                                                    TargetType="Button"
-                                                    Value="true">
-                                                    <Setter Property="BackgroundColor" Value="Orange" />
-                                                </DataTrigger>
-                                            </Button.Triggers>
-                                        </Button>
+                                        <Frame
+                                            Margin="3"
+                                            Padding="0"
+                                            CornerRadius="100">
+                                            <Button
+                                                x:Name="asasd"
+                                                Text="{Binding}"
+                                                TextColor="Black"
+                                                BackgroundColor="White"
+                                                FontSize="20"
+                                                VerticalOptions="Center"
+                                                HorizontalOptions="Center"
+                                                Margin="-5"
+                                                Padding="5"
+                                                Command="{Binding BindingContext.SelectNumberCommand, Source={Reference collectionView}}"
+                                                CommandParameter="{Binding Text, Source={RelativeSource Mode=Self}}">
+                                                <Button.Triggers>
+                                                    <DataTrigger
+                                                        Binding="{Binding Path=BindingContext.SelectNumber, Source={Reference collectionView}, Converter={StaticResource NumbersButtonConverter}, ConverterParameter={Reference asasd}}"
+                                                        TargetType="Button"
+                                                        Value="true">
+                                                        <Setter Property="BackgroundColor" Value="Orange" />
+                                                    </DataTrigger>
+                                                </Button.Triggers>
+                                            </Button>
+                                        </Frame>
                                     </Frame>
-                                </Frame>
-                            </StackLayout>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
             </Grid>
+        </StackLayout>
 
-
-
-        </Grid>
     </ContentPage.Content>
 </ContentPage>

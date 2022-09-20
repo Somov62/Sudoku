@@ -27,7 +27,10 @@ namespace SudokuLib.GeneratorTools
                 Chunk chunk = new Chunk(chunkSize);
                 for (int j = 0; j < chunkSize; j++)
                     for (int i = 0; i < chunkSize; i++)
+                    {
                         chunk[i, j].Value = matrix[i + chunkRow, j + chunkColumn];
+                        if (chunk[i, j].Value == 0) chunk[i, j].IsDefault = false;
+                    }    
                 return chunk;
             }
         }
