@@ -14,9 +14,10 @@ namespace Sudoku.PageModels
 
         public SudokuPageModel()
         {
-            SelectNumberCommand = new Command((object value) => SelectNumber = Convert.ToInt32(value).ToString());
-            Numbers = Enumerable.Range(1, 9).ToList();
-            Sudoku = new SudokuLib.Sudoku(3, 2);
+            SelectNumberCommand = new Command((object value) => SelectNumber(value));
+            Numbers = Enumerable.Range(1, 16).ToList();
+            Numbers.Add(0);
+            Sudoku = new SudokuLib.Sudoku(4, 2);
         }
 
         public SudokuLib.Sudoku Sudoku { get; set; }
@@ -25,15 +26,26 @@ namespace Sudoku.PageModels
 
 
 
-        private string _selectNumber;
-        public string SelectNumber
+        private int _selectedNumber;
+        public int SelectedNumber
         {
-            get => _selectNumber;
+            get => _selectedNumber;
             set
             {
-                _selectNumber = value;
-                base.RaisePropertyChanged(nameof(SelectNumber));
+                _selectedNumber = value;
+                base.RaisePropertyChanged(nameof(SelectedNumber));
             }
         }
+
+        private void SelectNumber(object value)
+        {
+            if (value.ToString() == "X")
+            {
+                SelectedNumber = 0;
+                return;
+            }
+            SelectedNumber = Convert.ToInt32(value);
+        }
+
     }
 }
