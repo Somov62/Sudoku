@@ -9,8 +9,10 @@
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Resources>
         <converters:NumbersButtonConverter x:Key="NumbersButtonConverter" />
+        <converters:NumbersConverter x:Key="NumbersConverter" />
         <converters:CollectionViewHeightConverter x:Key="CollectionViewHeightConverter" />
         <converters:CollectionViewFontSizeConverter x:Key="CollectionViewFontSizeConverter"/>
+        <converters:ColorButtonConverter x:Key="ColorButtonConverter"/>
     </ContentPage.Resources>
 
     <ContentPage.Content>
@@ -18,7 +20,7 @@
         <StackLayout>
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="3*" />
+                    <RowDefinition Height="auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
@@ -82,23 +84,34 @@
                                                             HorizontalOptions="Center"
                                                             Margin="-5"
                                                             Padding="5, 6, 5, 5"
-                                                            Command="{Binding BindingContext.SelectNumberCommand, Source={Reference numberCV}}"
-                                                            CommandParameter="{Binding Text, Source={RelativeSource Mode=Self}}">
+                                                            Command="{Binding BindingContext.SetNumberCommand, Source={Reference numberCV}}"
+                                                            CommandParameter="{Binding }">
                                                             <Button.Triggers>
                                                                 
-                                                                <DataTrigger TargetType="Button" Binding="{Binding IsDefault}" Value="false">
+                                                                <DataTrigger TargetType="Button" Binding="{Binding Value}" Value="0">
                                                                     <Setter Property="TextColor" Value="{Binding BackgroundColor, Source={Reference asasd}}" />
                                                                 </DataTrigger>
                                                                 <MultiTrigger TargetType="Button">
                                                                     <MultiTrigger.Conditions>
-                                                                        <BindingCondition Binding="{Binding Path=BindingContext.SelectedNumber, Source={Reference numberCV}, Converter={StaticResource NumbersButtonConverter}, ConverterParameter={Reference asasd}}" Value="true"/>
-                                                                        <BindingCondition Binding="{Binding IsDefault}" Value="true"/>
+                                                                        <BindingCondition Binding="{Binding Path=Text, Source={RelativeSource Mode=Self}, Converter={StaticResource NumbersConverter}, ConverterParameter={Reference numberCV}}" Value="true"/>
+                                                                        <BindingCondition Binding="{Binding Path=BindingContext.SelectedNumber, Source={Reference collectionView}, Converter={StaticResource NumbersButtonConverter}, ConverterParameter={Reference asasd}}" Value="true"/>
+
+                                                                        <BindingCondition Binding="{Binding Value, Converter={StaticResource ColorButtonConverter}}" Value="true"/>
                                                                     </MultiTrigger.Conditions>
                                                                     <MultiTrigger.Setters>
                                                                         <Setter Property="BackgroundColor" TargetName="asasd" Value="Orange" />
                                                                     </MultiTrigger.Setters>
                                                                 </MultiTrigger>
 
+                                                                <MultiTrigger TargetType="Button">
+                                                                    <MultiTrigger.Conditions>
+                                                                        <BindingCondition Binding="{Binding IsDefault}" Value="False"/>
+                                                                        <BindingCondition Binding="{Binding Value, Converter={StaticResource ColorButtonConverter}}" Value="true"/>
+                                                                    </MultiTrigger.Conditions>
+                                                                    <MultiTrigger.Setters>
+                                                                        <Setter Property="TextColor" TargetName="asasd" Value="Orange" />
+                                                                    </MultiTrigger.Setters>
+                                                                </MultiTrigger>
                                                             </Button.Triggers>
                                                         </Button>
                                                     </Frame>
@@ -140,8 +153,7 @@
                         HorizontalOptions="Fill" />
                 </Grid>
 
-                <StackLayout Grid.Row="1"
-                        InputTransparent="True">
+                <StackLayout Grid.Row="1">
                     <CollectionView
                         x:Name="collectionView"
                         ItemsSource="{Binding Numbers}"

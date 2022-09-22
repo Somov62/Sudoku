@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using FreshMvvm;
+using SudokuLib.Entities;
 using Xamarin.Forms;
 
 namespace Sudoku.PageModels
@@ -11,13 +12,15 @@ namespace Sudoku.PageModels
     {
 
         public Command SelectNumberCommand { get; }
+        public Command SetNumberCommand { get; }
 
         public SudokuPageModel()
         {
             SelectNumberCommand = new Command((object value) => SelectNumber(value));
-            Numbers = Enumerable.Range(1, 16).ToList();
+            SetNumberCommand = new Command((object value) => SetNumber(value));
+            Numbers = Enumerable.Range(1, 9).ToList();
             Numbers.Add(0);
-            Sudoku = new SudokuLib.Sudoku(4, 2);
+            Sudoku = new SudokuLib.Sudoku(3, 1);
         }
 
         public SudokuLib.Sudoku Sudoku { get; set; }
@@ -45,6 +48,18 @@ namespace Sudoku.PageModels
                 return;
             }
             SelectedNumber = Convert.ToInt32(value);
+        }
+
+        private void SetNumber(object value)
+        {
+            Number number = value as Number;
+
+            if (number.IsDefault)
+            {
+                SelectedNumber = number.Value;
+                return;
+            }
+            number.Value = SelectedNumber;
         }
 
     }
