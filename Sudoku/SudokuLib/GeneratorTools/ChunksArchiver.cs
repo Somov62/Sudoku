@@ -25,8 +25,8 @@ namespace SudokuLib.GeneratorTools
             Chunk PackInChunk(int chunkRow, int chunkColumn)
             {
                 Chunk chunk = new Chunk(chunkSize);
-                for (int j = 0; j < chunkSize; j++)
-                    for (int i = 0; i < chunkSize; i++)
+                for (int i = 0; i < chunkSize; i++)
+                    for (int j = 0; j < chunkSize; j++)
                     {
                         chunk[i, j].Value = matrix[i + chunkRow, j + chunkColumn];
                         if (chunk[i, j].Value == 0) chunk[i, j].IsDefault = false;
@@ -46,24 +46,20 @@ namespace SudokuLib.GeneratorTools
 
             int[,] matrix = new int[chunkSize * chunkSize, chunkSize * chunkSize];
 
-            int row = -1;
+            int row = 0;
             int column = 0 - chunkSize;
 
             for (int i = 0; i < chunks.Count; i++)
             {
-                if (i % chunkSize == 0)
+                column += chunkSize;
+                if (column == matrix.GetLength(0))
                 {
-                    if (column == matrix.GetLength(0) - 1)
-                    {
-                        column = 0;
-                        row += chunkSize;
-                    }
-                    else column += chunkSize;
-
+                    column = 0;
+                    row += chunkSize;
                 }
                 for (int j = 0; j < chunks[i].ChunkData.Count; j++)
                 {
-                    if (j % chunkSize == 0)
+                    if (j != 0 && j % chunkSize == 0)
                     {
                         row++;
                         column -= chunkSize;
@@ -71,8 +67,8 @@ namespace SudokuLib.GeneratorTools
                     matrix[row, column] = chunks[i].ChunkData[j].Value;
                     column++;
                 }
-                row -= chunkSize;
                 column -= chunkSize;
+                row -= chunkSize - 1;
 
             }
 

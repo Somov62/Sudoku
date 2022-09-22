@@ -21,7 +21,7 @@ namespace SudokuLib.GeneratorTools
             switch (difficultyLevel)
             {
                 case 1:
-                    countNumbersForDelete *= 0.2;
+                    countNumbersForDelete *= 0.05;
                     break;
                 case 2:
                     countNumbersForDelete *= 0.4;

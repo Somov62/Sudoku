@@ -54,12 +54,15 @@ namespace Sudoku.PageModels
         {
             Number number = value as Number;
 
-            if (number.IsDefault)
+            if (!number.IsDefault)
             {
-                SelectedNumber = number.Value;
-                return;
+                number.Value = SelectedNumber;
+                if (Sudoku.FreeSeatsCount() == 0)
+                {
+                    if (Sudoku.Validate()) base.CoreMethods.DisplayAlert("WIN", "You win", "ok");
+                }
             }
-            number.Value = SelectedNumber;
+            SelectedNumber = number.Value;
         }
 
     }
