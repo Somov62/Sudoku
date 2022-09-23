@@ -26,9 +26,8 @@ namespace Sudoku.Pages
             int chunkSize = 3;
             int span = (chunkSize * chunkSize + 1) / 2 + (chunkSize * chunkSize + 1) % 2;
 
-            cwLayout.Span = span;
             collectionView.WidthRequest = DeviceDisplay.MainDisplayInfo.Width / DeviceDisplay.MainDisplayInfo.Density - 40;
-            collectionView.HeightRequest = collectionView.WidthRequest / span * 2 + (span * 5 - span);
+            collectionView.HeightRequest = collectionView.WidthRequest / span * 2 + 6;
 
         }
 

@@ -19,7 +19,7 @@ namespace Sudoku.PageModels
         {
             PreviousLevel = new Command(() => { if (Level != 0) Level--; });
             NextLevel = new Command(() => { if (Level < Levels.Count - 1) Level++; });
-            ToSudokuPage = new Command(async () => await base.CoreMethods.PushPageModel<SudokuPageModel>());
+            ToSudokuPage = new Command(async () => await base.CoreMethods.PushPageModel<SudokuPageModel>(data : Level));
         }
 
 

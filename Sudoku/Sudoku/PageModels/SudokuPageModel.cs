@@ -16,11 +16,18 @@ namespace Sudoku.PageModels
 
         public SudokuPageModel()
         {
+            
             SelectNumberCommand = new Command((object value) => SelectNumber(value));
             SetNumberCommand = new Command((object value) => SetNumber(value));
             Numbers = Enumerable.Range(1, 9).ToList();
             Numbers.Add(0);
-            Sudoku = new SudokuLib.Sudoku(3, 1);
+        }
+
+        public override void Init(object initData)
+        {
+            base.Init(initData);
+            Sudoku = new SudokuLib.Sudoku(3, (int)initData);
+            int a = 90;
         }
 
         public SudokuLib.Sudoku Sudoku { get; set; }
