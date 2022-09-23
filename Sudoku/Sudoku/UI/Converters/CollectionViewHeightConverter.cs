@@ -12,7 +12,7 @@ namespace Sudoku.UI.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var result = (double)value / System.Convert.ToInt32(((Label)parameter).Text) - 1;
+            var result = (double)value / 3 - 1;
             return result;
         }
 

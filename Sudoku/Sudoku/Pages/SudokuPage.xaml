@@ -23,17 +23,11 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <Label
-                    x:Name="viewChunkSize"
-                    Text="{Binding Sudoku.CountChunksInDimension}"
-                    HeightRequest="0"
-                    IsVisible="false" />
                 <Grid VerticalOptions="Center">
                     <CollectionView
                         x:Name="numberCV"
                         ItemsSource="{Binding Sudoku.Chunks}"
-                        Margin="-3,0,0,0"
-                        SizeChanged="CollectionView_SizeChanged">
+                        Margin="-3,0,0,0">
                         <CollectionView.ItemsLayout>
                             <GridItemsLayout
                                 Orientation="Vertical"
@@ -47,8 +41,8 @@
                                     <CollectionView
                                         x:Name="innerCV"
                                         ItemsSource="{Binding ChunkData}"
-                                        WidthRequest="{Binding Height, Source={Reference numberCV}, Converter={StaticResource CollectionViewHeightConverter}, ConverterParameter={Reference viewChunkSize}}"
-                                        HeightRequest="{Binding Height, Source={Reference numberCV}, Converter={StaticResource CollectionViewHeightConverter}, ConverterParameter={Reference viewChunkSize}}"
+                                        WidthRequest="{Binding Height, Source={Reference numberCV}, Converter={StaticResource CollectionViewHeightConverter}}"
+                                        HeightRequest="{Binding Height, Source={Reference numberCV}, Converter={StaticResource CollectionViewHeightConverter}}"
                                         VerticalOptions="Start"
                                         Margin="2,1,0,0">
                                         <CollectionView.ItemsLayout>
@@ -61,8 +55,8 @@
                                         <CollectionView.ItemTemplate>
                                             <DataTemplate>
                                                 <Grid
-                                                    WidthRequest="{Binding Height, Source={Reference innerCV}, Converter={StaticResource CollectionViewHeightConverter}, ConverterParameter={Reference viewChunkSize}}"
-                                                    HeightRequest="{Binding Height, Source={Reference innerCV}, Converter={StaticResource CollectionViewHeightConverter}, ConverterParameter={Reference viewChunkSize}}"
+                                                    WidthRequest="{Binding Height, Source={Reference innerCV}, Converter={StaticResource CollectionViewHeightConverter}}"
+                                                    HeightRequest="{Binding Height, Source={Reference innerCV}, Converter={StaticResource CollectionViewHeightConverter}}"
                                                     VerticalOptions="Center"
                                                     HorizontalOptions="Center">
                                                     <Frame
@@ -166,66 +160,57 @@
                     <CollectionView
                         x:Name="collectionView"
                         ItemsSource="{Binding Numbers}"
-                        BackgroundColor="White"
+                        BackgroundColor="Blue"
                         VerticalOptions="Center"
-                        HorizontalOptions="Center"
-                        Margin="20">
+                        HorizontalOptions="Center">
                         <CollectionView.ItemsLayout>
                             <GridItemsLayout
+                                x:Name="cwLayout"
                                 Orientation="Vertical"
+                                HorizontalItemSpacing="5"
+                                VerticalItemSpacing="5"
                                 SnapPointsAlignment="Center"
-                                SnapPointsType="Mandatory"
-                                Span="5"
-                                VerticalItemSpacing="10" />
+                                SnapPointsType="Mandatory" />
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <StackLayout
-                                    VerticalOptions="Center"
-                                    HorizontalOptions="Center">
-
+                                <Frame
+                                    BackgroundColor="Orange"
+                                    Padding="0"
+                                    CornerRadius="100">
                                     <Frame
-                                        BackgroundColor="Orange"
-                                        WidthRequest="{Binding Path=Height, Source={RelativeSource Mode=Self}}"
-                                        HorizontalOptions="Center"
-                                        Margin="0,3"
+                                        Margin="3"
                                         Padding="0"
                                         CornerRadius="100">
-                                        <Frame
-                                            Margin="3"
-                                            Padding="0"
-                                            CornerRadius="100">
-                                            <Button
-                                                x:Name="asasd"
+                                        <Button
+                                            x:Name="asasd"
                                                 Text="{Binding}"
-                                                TextColor="Black"
-                                                BackgroundColor="White"
+                                            TextColor="Black"
+                                            BackgroundColor="White"
                                                 FontSize="20"
                                                 VerticalOptions="Center"
                                                 HorizontalOptions="Center"
-                                                Margin="-5"
-                                                Padding="5"
-                                                Command="{Binding BindingContext.SelectNumberCommand, Source={Reference collectionView}}"
-                                                CommandParameter="{Binding Text, Source={RelativeSource Mode=Self}}"
-                                                InputTransparent="False">
-                                                <Button.Triggers>
-                                                    <DataTrigger
-                                                        Binding="{Binding}"
-                                                        TargetType="Button"
-                                                        Value="0">
-                                                        <Setter Property="Text" Value="X" />
-                                                    </DataTrigger>
-                                                    <DataTrigger
-                                                        Binding="{Binding Path=BindingContext.SelectedNumber, Source={Reference collectionView}, Converter={StaticResource NumbersButtonConverter}, ConverterParameter={Reference asasd}}"
-                                                        TargetType="Button"
-                                                        Value="true">
-                                                        <Setter Property="BackgroundColor" Value="Orange" />
-                                                    </DataTrigger>
-                                                </Button.Triggers>
-                                            </Button>
-                                        </Frame>
+                                            Margin="-5"
+                                            Command="{Binding BindingContext.SelectNumberCommand, Source={Reference collectionView}}"
+                                            CommandParameter="{Binding Text, Source={RelativeSource Mode=Self}}"
+                                            InputTransparent="False">
+                                            <Button.Triggers>
+                                                <DataTrigger
+                                                    Binding="{Binding}"
+                                                    TargetType="Button"
+                                                    Value="0">
+                                                    <Setter Property="Text" Value="X" />
+                                                </DataTrigger>
+                                                <DataTrigger
+                                                    Binding="{Binding Path=BindingContext.SelectedNumber, Source={Reference collectionView}, Converter={StaticResource NumbersButtonConverter}, ConverterParameter={Reference asasd}}"
+                                                    TargetType="Button"
+                                                    Value="true">
+                                                    <Setter Property="BackgroundColor" Value="Orange" />
+                                                </DataTrigger>
+                                            </Button.Triggers>
+                                        </Button>
                                     </Frame>
-                                </StackLayout>
+                                </Frame>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
