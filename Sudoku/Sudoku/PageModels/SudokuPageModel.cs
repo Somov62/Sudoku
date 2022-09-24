@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Sudoku.PageModels
@@ -14,17 +15,28 @@ namespace Sudoku.PageModels
 
         public SudokuPageModel(int difficulty)
         {
-            
+            Difficulty = difficulty;
             SelectNumberCommand = new Command((object value) => SelectNumber(value));
             SetNumberCommand = new Command((object value) => SetNumber(value));
-            Numbers = Enumerable.Range(1, 9).ToList();
-            Numbers.Add(0);
-            Sudoku = new SudokuLib.Sudoku(3, difficulty);
         }
 
-        public SudokuLib.Sudoku Sudoku { get; set; }
+        public int Difficulty { get; set; }
 
-        public List<int> Numbers { get; set; }
+        private SudokuLib.Sudoku _sudoku;
+        public SudokuLib.Sudoku Sudoku 
+        {
+            get => _sudoku;
+            set => Set(ref _sudoku, value, nameof(Sudoku));
+        }
+
+
+        private List<int> _numbers;
+
+        public List<int> Numbers
+        {
+            get => _numbers;
+            set => Set(ref _numbers, value, nameof(Numbers));
+        }
 
         private int _selectedNumber;
         public int SelectedNumber
@@ -63,5 +75,17 @@ namespace Sudoku.PageModels
             bool a = true;
         }
 
+
+        public void AddNumbers()
+        {
+            var list = Enumerable.Range(1, 9).ToList();
+            list.Add(0);
+            Numbers = list;
+        }
+
+        public async void CreateSudoku()
+        {
+            await Task.Run(() => new SudokuLib.Sudoku(3)).ContinueWith(task => Sudoku = task.Result);
+        }
     }
 }
