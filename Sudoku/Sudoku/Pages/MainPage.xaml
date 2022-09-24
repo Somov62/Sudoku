@@ -139,7 +139,7 @@
                 Padding="90,0"
                 BorderColor="Orange"
                 BorderWidth="1"
-                Command="{Binding ToSudokuPage}"
+                Clicked="Button_Clicked"
                 CornerRadius="20"
                 TextTransform="None" />
         </StackLayout>

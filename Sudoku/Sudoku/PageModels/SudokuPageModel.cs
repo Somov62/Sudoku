@@ -1,50 +1,36 @@
-﻿using System;
+﻿using SudokuLib.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using FreshMvvm;
-using SudokuLib.Entities;
 using Xamarin.Forms;
 
 namespace Sudoku.PageModels
 {
-    public class SudokuPageModel : FreshBasePageModel
+    public class SudokuPageModel : Base.BaseViewModel
     {
 
         public Command SelectNumberCommand { get; }
         public Command SetNumberCommand { get; }
 
-        public SudokuPageModel()
+        public SudokuPageModel(int difficulty)
         {
             
             SelectNumberCommand = new Command((object value) => SelectNumber(value));
             SetNumberCommand = new Command((object value) => SetNumber(value));
             Numbers = Enumerable.Range(1, 9).ToList();
             Numbers.Add(0);
-        }
-
-        public override void Init(object initData)
-        {
-            base.Init(initData);
-            Sudoku = new SudokuLib.Sudoku(3, (int)initData);
-            int a = 90;
+            Sudoku = new SudokuLib.Sudoku(3, difficulty);
         }
 
         public SudokuLib.Sudoku Sudoku { get; set; }
 
         public List<int> Numbers { get; set; }
 
-
-
         private int _selectedNumber;
         public int SelectedNumber
         {
             get => _selectedNumber;
-            set
-            {
-                _selectedNumber = value;
-                base.RaisePropertyChanged(nameof(SelectedNumber));
-            }
+            set => Set(ref _selectedNumber, value, nameof(SelectedNumber));
         }
 
         private void SelectNumber(object value)
@@ -66,10 +52,15 @@ namespace Sudoku.PageModels
                 number.Value = SelectedNumber;
                 if (Sudoku.FreeSeatsCount() == 0)
                 {
-                    if (Sudoku.Validate()) base.CoreMethods.DisplayAlert("WIN", "You win", "ok");
+                    if (Sudoku.Validate()) Win();
                 }
             }
             SelectedNumber = number.Value;
+        }
+
+        private void Win()
+        {
+            bool a = true;
         }
 
     }

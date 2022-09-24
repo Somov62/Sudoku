@@ -1,5 +1,4 @@
-﻿using FreshMvvm;
-using System;
+﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,9 +9,7 @@ namespace Sudoku
         public App()
         {
             InitializeComponent();
-            var mainPage = FreshPageModelResolver.ResolvePageModel<PageModels.MainPageModel>();
-            var navigationPage = new FreshNavigationContainer(mainPage);
-            MainPage = navigationPage;
+            MainPage = new NavigationPage(new Pages.MainPage());
         }
 
         protected override void OnStart()
