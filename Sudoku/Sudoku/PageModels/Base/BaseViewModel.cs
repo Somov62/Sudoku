@@ -7,7 +7,6 @@ namespace Sudoku.PageModels.Base
     {
         protected void Set<T>(ref T source, T value, string property = null)
         {
-            if (source.Equals(value)) return;
             source = value;
             OnPropertyChanged(property);
         }
