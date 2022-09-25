@@ -17,8 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="UI\Themes\" />
-    <Folder Include="UI\Controls\" />
     <Folder Include="UI\Styles\" />
     <Folder Include="Services\" />
     <Folder Include="Interfaces\" />
@@ -30,6 +28,12 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Pages\SudokuPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UI\Controls\Expander.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UI\Themes\LightBlueTheme.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

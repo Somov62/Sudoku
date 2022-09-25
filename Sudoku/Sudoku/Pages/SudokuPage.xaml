@@ -3,6 +3,7 @@
     x:Class="Sudoku.Pages.SudokuPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:Sudoku.UI.Controls"
     xmlns:converters="clr-namespace:Sudoku.UI.Converters"
     BackgroundColor="White"
     Appearing="ContentPage_Appearing"
@@ -13,6 +14,53 @@
         <converters:CollectionViewFontSizeConverter x:Key="CollectionViewFontSizeConverter" />
         <converters:ColorButtonConverter x:Key="ColorButtonConverter" />
     </ContentPage.Resources>
+
+    <NavigationPage.TitleView>
+        <Grid>
+            <controls:Expander
+                HeightRequest="50"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="End"
+                Margin="0, 0, 10,0">
+                <controls:Expander.ContentTemplate>
+                    <CollectionView
+                        ItemsSource="{Binding BindingContext.Numbers, Source={Reference numberCV}}"
+                        HeightRequest="40"
+                        VerticalOptions="Center"
+                        ItemsUpdatingScrollMode="KeepScrollOffset">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout
+                                ItemSpacing="10"
+                                Orientation="Horizontal" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame
+                                    BackgroundColor="Orange"
+                                    WidthRequest="28"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"
+                                    Padding="0"
+                                    CornerRadius="100"
+                                    IsClippedToBounds="True">
+                                    <Frame
+                                        BackgroundColor="White"
+                                        WidthRequest="{Binding Height, Source={RelativeSource Mode=Self}}"
+                                        VerticalOptions="FillAndExpand"
+                                        HorizontalOptions="FillAndExpand"
+                                        Margin="7"
+                                        Padding="0"
+                                        CornerRadius="100"
+                                        IsClippedToBounds="True" />
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+                    </CollectionView>
+                </controls:Expander.ContentTemplate>
+            </controls:Expander>
+        </Grid>
+    </NavigationPage.TitleView>
 
     <ContentPage.Content>
 
@@ -79,7 +127,6 @@
                                                         Command="{Binding BindingContext.SetNumberCommand, Source={Reference numberCV}}"
                                                         CommandParameter="{Binding}">
                                                         <Button.Triggers>
-
                                                             <DataTrigger
                                                                 Binding="{Binding Value, Converter={StaticResource ColorButtonConverter}}"
                                                                 TargetType="Button"
