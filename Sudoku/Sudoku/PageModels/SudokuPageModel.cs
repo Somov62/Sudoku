@@ -1,4 +1,5 @@
-﻿using SudokuLib.Entities;
+﻿using Sudoku.Services;
+using SudokuLib.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,6 +45,9 @@ namespace Sudoku.PageModels
             get => _selectedNumber;
             set => Set(ref _selectedNumber, value, nameof(SelectedNumber));
         }
+
+
+        public List<ThemeEntity> Colors => ThemeManager.Themes;
 
         private void SelectNumber(object value)
         {

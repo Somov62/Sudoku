@@ -1,18 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ResourceDictionary
+    x:Class="Sudoku.UI.Themes.LightBlueTheme"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
-    <Color x:Key="MainBackgroundColor">White</Color>
-    <Color x:Key="MainForegroundColor">Gray</Color>
+    <Color x:Key="MainBackgroundColor">DarkBlue</Color>
+    <Color x:Key="MainForegroundColor">LightBlue</Color>
 
     <Color x:Key="AccentColor">Aqua</Color>
-    <Color x:Key="BorderColor">LightGray</Color>
+    <Color x:Key="BorderColor">LightBlue</Color>
 
-    <Color x:Key="GridBackgroundColor">LightGray</Color>
-    <Color x:Key="GridForegroundColor">Gray</Color>
+    <Color x:Key="GridBackgroundColor">CadetBlue</Color>
+    <Color x:Key="GridForegroundColor">LightBlue</Color>
 
-    <Color x:Key="GridMainLineColor">CadetBlue</Color>
+    <Color x:Key="GridMainLineColor">Blue</Color>
     <Color x:Key="GridSecLineColor">LIghtBlue</Color>
 
-
+    <Color x:Key="NavBarColor">DarkBlue</Color>
+    <Color x:Key="StatusBarColor">DarkBlue</Color>
 </ResourceDictionary>

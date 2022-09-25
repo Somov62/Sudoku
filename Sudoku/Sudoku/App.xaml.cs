@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sudoku.Services;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -9,6 +10,7 @@ namespace Sudoku
         public App()
         {
             InitializeComponent();
+            ThemeManager.SetStartUpTheme();
             MainPage = new NavigationPage(new Pages.MainPage());
         }
 
