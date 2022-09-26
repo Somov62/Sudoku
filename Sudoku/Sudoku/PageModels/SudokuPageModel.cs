@@ -13,12 +13,14 @@ namespace Sudoku.PageModels
 
         public Command SelectNumberCommand { get; }
         public Command SetNumberCommand { get; }
+        public Command SetThemeCommand { get; }
 
         public SudokuPageModel(int difficulty)
         {
             Difficulty = difficulty;
             SelectNumberCommand = new Command((object value) => SelectNumber(value));
             SetNumberCommand = new Command((object value) => SetNumber(value));
+            SetThemeCommand = new Command((object value) => SetTheme(value));
         }
 
         public int Difficulty { get; set; }
@@ -74,6 +76,13 @@ namespace Sudoku.PageModels
             SelectedNumber = number.Value;
         }
 
+        private void SetTheme(object value)
+        {
+            ThemeEntity themeEntity = value as ThemeEntity;
+
+            ThemeManager.SetTheme(themeEntity.Theme);
+
+        }
         private void Win()
         {
             bool a = true;

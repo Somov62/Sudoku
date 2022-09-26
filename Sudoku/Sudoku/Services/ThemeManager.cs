@@ -9,14 +9,14 @@ namespace Sudoku.Services
     {
         private const string _propertyName = "ThemeName";
 
-        private static List<ThemeEntity> _themes = new List<ThemeEntity>()
+        private static readonly Dictionary<Theme, ThemeEntity> _themes = new Dictionary<Theme, ThemeEntity>()
         {
-            new ThemeEntity(Theme.LightBlueTheme, new UI.Themes.LightBlueTheme()),
-            new ThemeEntity(Theme.DarkBlueTheme, new UI.Themes.DarkBlueTheme())
+            { Theme.LightBlueTheme,  new ThemeEntity(Theme.LightBlueTheme, new UI.Themes.LightBlueTheme()) },
+            { Theme.DarkBlueTheme, new ThemeEntity(Theme.DarkBlueTheme, new UI.Themes.DarkBlueTheme()) }
         };
 
 
-        public static List<ThemeEntity> Themes => _themes;
+        public static List<ThemeEntity> Themes => _themes.Values.ToList();
 
         public static Theme GetCurrentTheme()
         {
@@ -46,7 +46,8 @@ namespace Sudoku.Services
             SetTheme(theme);
         }
 
-        public static void SetTheme(Theme theme)
+
+        public static void SetTheme(Theme theme)        
         {
             DeleteOldTheme();
             switch (theme)
@@ -58,6 +59,7 @@ namespace Sudoku.Services
                     Application.Current.Resources.MergedDictionaries.Add(new UI.Themes.DarkBlueTheme());
                     break;
             }
+            _themes[theme].IsSelected = true;
             App.Current.Properties[_propertyName] = theme.ToString();
             ColorManager.SetNavBarColor("NavBarColor");
             ColorManager.SetStatusBarColor("StatusBarColor");
@@ -66,6 +68,8 @@ namespace Sudoku.Services
         private static void DeleteOldTheme()
         {
             ResourceDictionary theme = GetCurrentResource();
+            if (theme == null) return;
+            _themes[GetCurrentTheme()].IsSelected = false;
             Application.Current.Resources.MergedDictionaries.Remove(theme);
         }
 
@@ -89,7 +93,7 @@ namespace Sudoku.Services
         {
             Theme = theme;
             Dictionary = dictionary;
-            MainColor = ColorManager.GetColorFromResource("MainColor", Dictionary);
+            MainColor = ColorManager.GetColorFromResource("MainBackgroundColor", Dictionary);
             ColorAccent = ColorManager.GetColorFromResource("AccentColor", Dictionary);
         }
         public Theme Theme { get; set; }

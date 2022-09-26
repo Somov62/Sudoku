@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:Sudoku.UI.Controls"
     xmlns:converters="clr-namespace:Sudoku.UI.Converters"
-    BackgroundColor="White"
+    BackgroundColor="{DynamicResource MainBackgroundColor}"
     Appearing="ContentPage_Appearing"
     NavigationPage.HasBackButton="True">
     <ContentPage.Resources>
@@ -24,7 +24,7 @@
                 Margin="0, 0, 10,0">
                 <controls:Expander.ContentTemplate>
                     <CollectionView
-                        ItemsSource="{Binding BindingContext.Numbers, Source={Reference numberCV}}"
+                        ItemsSource="{Binding BindingContext.Colors, Source={Reference numberCV}}"
                         HeightRequest="40"
                         VerticalOptions="Center"
                         ItemsUpdatingScrollMode="KeepScrollOffset">
@@ -36,7 +36,7 @@
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <Frame
-                                    BackgroundColor="Orange"
+                                    BackgroundColor="{Binding ColorAccent}"
                                     WidthRequest="28"
                                     VerticalOptions="Center"
                                     HorizontalOptions="Center"
@@ -44,7 +44,8 @@
                                     CornerRadius="100"
                                     IsClippedToBounds="True">
                                     <Frame
-                                        BackgroundColor="White"
+                                        InputTransparent="False"
+                                        BackgroundColor="{Binding MainColor}"
                                         WidthRequest="{Binding Height, Source={RelativeSource Mode=Self}}"
                                         VerticalOptions="FillAndExpand"
                                         HorizontalOptions="FillAndExpand"
@@ -52,6 +53,9 @@
                                         Padding="0"
                                         CornerRadius="100"
                                         IsClippedToBounds="True" />
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding BindingContext.SetThemeCommand, Source={Reference numberCV}}" CommandParameter="{Binding}" />
+                                    </Frame.GestureRecognizers>
                                 </Frame>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
@@ -219,7 +223,7 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Frame
-                                BackgroundColor="White"
+                                BackgroundColor="{DynamicResource MainBackgroundColor}"
                                 HeightRequest="{Binding Path=Width, Source={RelativeSource Mode=Self}}"
                                 HorizontalOptions="Center"
                                 Margin="0,5"
@@ -241,12 +245,12 @@
                                             x:Name="asasd"
                                             Text="{Binding}"
                                             TextColor="Black"
-                                            BackgroundColor="White"
+                                            BackgroundColor="Red"
                                             FontSize="{Binding Width, Source={RelativeSource Mode=Self}, Converter={StaticResource CollectionViewFontSizeConverter}}"
-                                            Margin="0"
+                                            Margin="0, -5"
                                             Command="{Binding BindingContext.SelectNumberCommand, Source={Reference collectionView}}"
                                             CommandParameter="{Binding Text, Source={RelativeSource Mode=Self}}"
-                                            InputTransparent="False">
+                                            >
                                             <Button.Triggers>
                                                 <DataTrigger
                                                     Binding="{Binding}"
