@@ -3,9 +3,59 @@
     x:Class="Sudoku.Pages.MainPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:Sudoku.UI.Controls"
     xmlns:fa="clr-namespace:Xamarin.Forms.FontAwesome.Controls;assembly=Xamarin.Forms.FontAwesome"
-    NavigationPage.HasNavigationBar="False">
+    BackgroundColor="{DynamicResource MainBackgroundColor}">
+    <NavigationPage.TitleView>
+        <Grid>
+            <controls:Expander
+                HeightRequest="50"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="End"
+                Margin="0, 0, 10,0">
+                <controls:Expander.ContentTemplate>
+                    <CollectionView
+                        ItemsSource="{Binding BindingContext.Colors, Source={Reference carouselView}}"
+                        HeightRequest="40"
+                        VerticalOptions="Center"
+                        ItemsUpdatingScrollMode="KeepScrollOffset">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout
+                                ItemSpacing="10"
+                                Orientation="Horizontal" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame
+                                    BackgroundColor="{Binding ColorAccent}"
+                                    WidthRequest="28"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"
+                                    Padding="0"
+                                    CornerRadius="100"
+                                    IsClippedToBounds="True">
+                                    <Frame
+                                        InputTransparent="False"
+                                        BackgroundColor="{Binding MainColor}"
+                                        WidthRequest="{Binding Height, Source={RelativeSource Mode=Self}}"
+                                        VerticalOptions="FillAndExpand"
+                                        HorizontalOptions="FillAndExpand"
+                                        Margin="7"
+                                        Padding="0"
+                                        CornerRadius="100"
+                                        IsClippedToBounds="True" />
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding BindingContext.SetThemeCommand, Source={Reference carouselView}}" CommandParameter="{Binding}" />
+                                    </Frame.GestureRecognizers>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
 
+                    </CollectionView>
+                </controls:Expander.ContentTemplate>
+            </controls:Expander>
+        </Grid>
+    </NavigationPage.TitleView>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -20,10 +70,10 @@
                 HeightRequest="200"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
-                Fill="Orange" />
+                Fill="{DynamicResource AccentColor}" />
 
             <Line
-                Stroke="White"
+                Stroke="{DynamicResource MainBackgroundColor}"
                 StrokeThickness="12"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
@@ -36,7 +86,7 @@
                 Y2="150" />
 
             <Line
-                Stroke="White"
+                Stroke="{DynamicResource MainBackgroundColor}"
                 StrokeThickness="12"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
@@ -48,7 +98,7 @@
                 Y2="150" />
 
             <Line
-                Stroke="White"
+                Stroke="{DynamicResource MainBackgroundColor}"
                 StrokeThickness="12"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
@@ -60,7 +110,7 @@
                 Y1="0"
                 Y2="0" />
             <Line
-                Stroke="White"
+                Stroke="{DynamicResource MainBackgroundColor}"
                 StrokeThickness="12"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
@@ -81,7 +131,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <fa:Icon
-                TextColor="Gray"
+                TextColor="{DynamicResource MainForegroundColor}"
                 FontSize="26"
                 VerticalOptions="Center"
                 HorizontalOptions="End"
@@ -94,7 +144,7 @@
             </fa:Icon>
             <fa:Icon
                 Grid.Column="2"
-                TextColor="Gray"
+                TextColor="{DynamicResource MainForegroundColor}"
                 FontSize="26"
                 VerticalOptions="Center"
                 HorizontalOptions="Start"
@@ -117,6 +167,7 @@
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
                         <Label
+                            TextColor="{DynamicResource MainForegroundColor}"
                             Text="{Binding}"
                             FontSize="20"
                             HorizontalTextAlignment="Center"
@@ -132,12 +183,12 @@
             Margin="0,20">
             <Button
                 Text="New game"
-                TextColor="Gray"
-                BackgroundColor="White"
+                TextColor="{DynamicResource MainForegroundColor}"
+                
                 FontSize="16"
                 HorizontalOptions="Center"
                 Padding="90,0"
-                BorderColor="Orange"
+                BorderColor="{DynamicResource BorderColor}"
                 BorderWidth="1"
                 Clicked="Button_Clicked"
                 CornerRadius="20"

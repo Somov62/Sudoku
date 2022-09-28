@@ -81,7 +81,6 @@ namespace Sudoku.PageModels
             ThemeEntity themeEntity = value as ThemeEntity;
 
             ThemeManager.SetTheme(themeEntity.Theme);
-
         }
         private void Win()
         {

@@ -5,8 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:Sudoku.UI.Controls"
     xmlns:converters="clr-namespace:Sudoku.UI.Converters"
-    BackgroundColor="{DynamicResource MainBackgroundColor}"
     Appearing="ContentPage_Appearing"
+    BackgroundColor="{DynamicResource MainBackgroundColor}"
     NavigationPage.HasBackButton="True">
     <ContentPage.Resources>
         <converters:NumbersButtonConverter x:Key="NumbersButtonConverter" />
@@ -24,6 +24,7 @@
                 Margin="0, 0, 10,0">
                 <controls:Expander.ContentTemplate>
                     <CollectionView
+                        BackgroundColor="{DynamicResource MainBackgroundColor}"
                         ItemsSource="{Binding BindingContext.Colors, Source={Reference numberCV}}"
                         HeightRequest="40"
                         VerticalOptions="Center"
@@ -76,6 +77,7 @@
 
             <Grid VerticalOptions="Center">
                 <CollectionView
+                    BackgroundColor="{DynamicResource MainBackgroundColor}"
                     x:Name="numberCV"
                     ItemsSource="{Binding Sudoku.Chunks}"
                     Margin="-3,0,0,0">
@@ -111,7 +113,7 @@
                                                 VerticalOptions="Center"
                                                 HorizontalOptions="Center">
                                                 <Frame
-                                                    BackgroundColor="Orange"
+                                                    BackgroundColor="{DynamicResource NumberSelectedBackgroundColor}"
                                                     HeightRequest="{Binding Path=Width, Source={RelativeSource Mode=Self}}"
                                                     HorizontalOptions="Center"
                                                     Margin="3"
@@ -121,12 +123,10 @@
                                                     <Button
                                                         x:Name="asasd"
                                                         Text=" "
-                                                        TextColor="Black"
-                                                        BackgroundColor="White"
+                                                        BackgroundColor="{DynamicResource MainBackgroundColor}"
                                                         FontSize="{Binding Height, Source={RelativeSource Mode=Self}, Converter={StaticResource CollectionViewFontSizeConverter}}"
                                                         VerticalOptions="Center"
                                                         HorizontalOptions="Center"
-                                                        Margin="-5"
                                                         Padding="5,6,5,5"
                                                         Command="{Binding BindingContext.SetNumberCommand, Source={Reference numberCV}}"
                                                         CommandParameter="{Binding}">
@@ -137,6 +137,10 @@
                                                                 Value="true">
                                                                 <Setter Property="Text" Value="{Binding Value}" />
                                                             </DataTrigger>
+                                                            <DataTrigger TargetType="Button" Binding="{Binding IsDefault}">
+                                                                <Setter Property="Background" Value="{DynamicResource DefaultNumberBackgroundColor}" />
+                                                            </DataTrigger>
+                                                            
                                                             <MultiTrigger TargetType="Button">
                                                                 <MultiTrigger.Conditions>
                                                                     <BindingCondition
@@ -147,8 +151,8 @@
                                                                         Value="true" />
                                                                 </MultiTrigger.Conditions>
                                                                 <MultiTrigger.Setters>
-                                                                    <Setter TargetName="asasd" Property="BackgroundColor" Value="Orange" />
-                                                                    <Setter TargetName="asasd" Property="TextColor" Value="White" />
+                                                                    <Setter TargetName="asasd" Property="BackgroundColor" Value="{DynamicResource NumberSelectedBackgroundColor}" />
+                                                                    <Setter TargetName="asasd" Property="TextColor" Value="{DynamicResource NumberSelectedForegroundColor}" />
                                                                 </MultiTrigger.Setters>
                                                             </MultiTrigger>
 
@@ -162,19 +166,19 @@
                                                                         Value="true" />
                                                                 </MultiTrigger.Conditions>
                                                                 <MultiTrigger.Setters>
-                                                                    <Setter TargetName="asasd" Property="TextColor" Value="Orange" />
+                                                                    <Setter TargetName="asasd" Property="TextColor" Value="{DynamicResource SettedNumberForegroundColor}" />
                                                                 </MultiTrigger.Setters>
                                                             </MultiTrigger>
                                                         </Button.Triggers>
                                                     </Button>
                                                 </Frame>
                                                 <BoxView
-                                                    BackgroundColor="Black"
+                                                    BackgroundColor="{DynamicResource GridSecLineColor}"
                                                     HeightRequest="1"
                                                     VerticalOptions="Start"
                                                     Margin="5,0" />
                                                 <BoxView
-                                                    BackgroundColor="Black"
+                                                    BackgroundColor="{DynamicResource GridSecLineColor}"
                                                     WidthRequest="1"
                                                     HorizontalOptions="Start"
                                                     Margin="0,5" />
@@ -183,12 +187,12 @@
                                     </CollectionView.ItemTemplate>
                                 </CollectionView>
                                 <BoxView
-                                    BackgroundColor="Black"
+                                    BackgroundColor="{DynamicResource GridMainLineColor}"
                                     HeightRequest="3"
                                     VerticalOptions="Start"
                                     Margin="0" />
                                 <BoxView
-                                    BackgroundColor="Black"
+                                    BackgroundColor="{DynamicResource GridMainLineColor}"
                                     WidthRequest="3"
                                     HorizontalOptions="Start"
                                     Margin="0,-4" />
@@ -198,7 +202,7 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
                 <BoxView
-                    BackgroundColor="White"
+                    BackgroundColor="{DynamicResource MainBackgroundColor}"
                     HeightRequest="3"
                     VerticalOptions="Start"
                     HorizontalOptions="Fill" />
@@ -231,42 +235,36 @@
                                 CornerRadius="100"
                                 HasShadow="False">
                                 <Frame
-                                    BackgroundColor="Orange"
-                                    Margin="3"
-                                    Padding="0"
-                                    CornerRadius="100"
-                                    HasShadow="False">
-                                    <Frame
+                                    BorderColor="{DynamicResource BorderColor}"
                                         Margin="3"
                                         Padding="0,0"
                                         CornerRadius="100"
                                         HasShadow="False">
-                                        <Button
+                                    <Button
                                             x:Name="asasd"
                                             Text="{Binding}"
-                                            TextColor="Black"
-                                            BackgroundColor="Red"
+                                            TextColor="{DynamicResource MainForegroundColor}"
+                                            BackgroundColor="{DynamicResource MainBackgroundColor}"
                                             FontSize="{Binding Width, Source={RelativeSource Mode=Self}, Converter={StaticResource CollectionViewFontSizeConverter}}"
                                             Margin="0, -5"
                                             Command="{Binding BindingContext.SelectNumberCommand, Source={Reference collectionView}}"
                                             CommandParameter="{Binding Text, Source={RelativeSource Mode=Self}}"
                                             >
-                                            <Button.Triggers>
-                                                <DataTrigger
+                                        <Button.Triggers>
+                                            <DataTrigger
                                                     Binding="{Binding}"
                                                     TargetType="Button"
                                                     Value="0">
-                                                    <Setter Property="Text" Value="X" />
-                                                </DataTrigger>
-                                                <DataTrigger
+                                                <Setter Property="Text" Value="X" />
+                                            </DataTrigger>
+                                            <DataTrigger
                                                     Binding="{Binding Path=BindingContext.SelectedNumber, Source={Reference collectionView}, Converter={StaticResource NumbersButtonConverter}, ConverterParameter={Reference asasd}}"
                                                     TargetType="Button"
                                                     Value="true">
-                                                    <Setter Property="BackgroundColor" Value="Orange" />
-                                                </DataTrigger>
-                                            </Button.Triggers>
-                                        </Button>
-                                    </Frame>
+                                                <Setter Property="BackgroundColor" Value="{DynamicResource BorderColor}" />
+                                            </DataTrigger>
+                                        </Button.Triggers>
+                                    </Button>
                                 </Frame>
                             </Frame>
 

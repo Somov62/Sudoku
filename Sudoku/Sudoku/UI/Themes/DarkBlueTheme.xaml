@@ -3,6 +3,7 @@
     x:Class="Sudoku.UI.Themes.DarkBlueTheme"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    
     <Color x:Key="MainBackgroundColor">White</Color>
     <Color x:Key="MainForegroundColor">Gray</Color>
 
@@ -14,6 +15,13 @@
 
     <Color x:Key="GridMainLineColor">CadetBlue</Color>
     <Color x:Key="GridSecLineColor">LIghtBlue</Color>
+
+    <Color x:Key="DefaultNumberBackgroundColor">Cadetblue</Color>
+
+    <Color x:Key="NumberSelectedBackgroundColor">Aqua</Color>
+    <Color x:Key="NumberSelectedForegroundColor">White</Color>
+
+    <Color x:Key="SettedNumberForegroundColor">LightBlue</Color>
 
     <Color x:Key="NavBarColor">White</Color>
     <Color x:Key="StatusBarColor">White</Color>

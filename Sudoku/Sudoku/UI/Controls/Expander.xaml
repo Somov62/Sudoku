@@ -14,13 +14,16 @@
                 HorizontalOptions="End"
                 Padding="10,10, 5, 10"
                 Margin="1, 1, 15, 1"
-                BorderColor="Black"
+                BorderColor="{DynamicResource BorderColor}"
+                BackgroundColor="{DynamicResource MainBackgroundColor}"
                 IsClippedToBounds="True"
                 CornerRadius="100">
                 <ContentView IsClippedToBounds="True" Content="{Binding ContentTemplate}" />
             </Frame>
             <Frame
-                BackgroundColor="DarkGray"
+                HasShadow="False"
+                BackgroundColor="{DynamicResource MainBackgroundColor}"
+                BorderColor="{DynamicResource BorderColor}"
                 WidthRequest="52"
                 HeightRequest="52"
                 VerticalOptions="Center"
@@ -28,7 +31,7 @@
                 Padding="0"
                 CornerRadius="100">
                 <fa:Icon
-                    TextColor="White"
+                    TextColor="{DynamicResource AccentColor}"
                     FontSize="25"
                     VerticalOptions="Center"
                     HorizontalOptions="Center"
@@ -37,6 +40,7 @@
                     <fa:Icon.GestureRecognizers>
                         <TapGestureRecognizer Tapped="Button_Tapped" />
                     </fa:Icon.GestureRecognizers>
+                    
                 </fa:Icon>
             </Frame>
 

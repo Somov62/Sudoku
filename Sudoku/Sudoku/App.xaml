@@ -4,8 +4,8 @@
              x:Class="Sudoku.App">
     <Application.Resources>
         <Style TargetType="NavigationPage">
-            <Setter Property="BarBackgroundColor" Value="White" />
-            <Setter Property="BarTextColor" Value="Black" />
+            <Setter Property="BarBackgroundColor" Value="{DynamicResource MainBackgroundColor}" />
+            <Setter Property="BarTextColor" Value="{DynamicResource MainForegroundColor}" />
         </Style>
     </Application.Resources>
 </Application>
