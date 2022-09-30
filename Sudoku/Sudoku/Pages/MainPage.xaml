@@ -12,7 +12,7 @@
                 HeightRequest="50"
                 VerticalOptions="FillAndExpand"
                 HorizontalOptions="End"
-                Margin="0, 0, 10,0">
+                Margin="0,0,10,0">
                 <controls:Expander.ContentTemplate>
                     <CollectionView
                         ItemsSource="{Binding BindingContext.Colors, Source={Reference carouselView}}"
@@ -27,7 +27,7 @@
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <Frame
-                                    BackgroundColor="{Binding ColorAccent}"
+                                    BackgroundColor="{Binding MainColor}"
                                     WidthRequest="28"
                                     VerticalOptions="Center"
                                     HorizontalOptions="Center"
@@ -35,19 +35,40 @@
                                     CornerRadius="100"
                                     IsClippedToBounds="True">
                                     <Frame
-                                        InputTransparent="False"
-                                        BackgroundColor="{Binding MainColor}"
+                                        BackgroundColor="{Binding ColorAccent}"
                                         WidthRequest="{Binding Height, Source={RelativeSource Mode=Self}}"
                                         VerticalOptions="FillAndExpand"
                                         HorizontalOptions="FillAndExpand"
                                         Margin="7"
                                         Padding="0"
                                         CornerRadius="100"
-                                        IsClippedToBounds="True" />
+                                        InputTransparent="False"
+                                        IsClippedToBounds="True">
+                                        <Frame.Triggers>
+                                            <DataTrigger
+                                                Binding="{Binding IsSelected}"
+                                                TargetType="Frame"
+                                                Value="true">
+                                                <Setter Property="BackgroundColor" Value="{Binding MainColor}" />
+                                                <Setter Property="Margin" Value="4" />
+                                            </DataTrigger>
+                                        </Frame.Triggers>
+                                    </Frame>
                                     <Frame.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding BindingContext.SetThemeCommand, Source={Reference carouselView}}" CommandParameter="{Binding}" />
+                                        <TapGestureRecognizer
+                                            Command="{Binding BindingContext.SetThemeCommand, Source={Reference carouselView}}"
+                                            CommandParameter="{Binding}" />
                                     </Frame.GestureRecognizers>
+                                    <Frame.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding IsSelected}"
+                                            TargetType="Frame"
+                                            Value="true">
+                                            <Setter Property="BackgroundColor" Value="{Binding ColorAccent}" />
+                                        </DataTrigger>
+                                    </Frame.Triggers>
                                 </Frame>
+
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
 
@@ -167,8 +188,8 @@
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
                         <Label
-                            TextColor="{DynamicResource MainForegroundColor}"
                             Text="{Binding}"
+                            TextColor="{DynamicResource MainForegroundColor}"
                             FontSize="20"
                             HorizontalTextAlignment="Center"
                             VerticalTextAlignment="Center" />
@@ -184,10 +205,10 @@
             <Button
                 Text="New game"
                 TextColor="{DynamicResource MainForegroundColor}"
-                
                 FontSize="16"
                 HorizontalOptions="Center"
                 Padding="90,0"
+                BackgroundColor="{DynamicResource MainBackgroundColor}"
                 BorderColor="{DynamicResource BorderColor}"
                 BorderWidth="1"
                 Clicked="Button_Clicked"

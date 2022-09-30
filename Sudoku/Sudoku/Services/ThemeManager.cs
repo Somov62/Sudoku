@@ -12,7 +12,13 @@ namespace Sudoku.Services
         private static readonly Dictionary<Theme, ThemeEntity> _themes = new Dictionary<Theme, ThemeEntity>()
         {
             { Theme.LightBlueTheme,  new ThemeEntity(Theme.LightBlueTheme, new UI.Themes.LightBlueTheme()) },
-            { Theme.DarkBlueTheme, new ThemeEntity(Theme.DarkBlueTheme, new UI.Themes.DarkBlueTheme()) }
+            { Theme.LightYellowTheme,  new ThemeEntity(Theme.LightYellowTheme, new UI.Themes.LightYellowTheme()) },
+            { Theme.LightRuddyTheme,  new ThemeEntity(Theme.LightRuddyTheme, new UI.Themes.LightRuddyTheme()) },
+            { Theme.DarkBlueTheme, new ThemeEntity(Theme.DarkBlueTheme, new UI.Themes.DarkBlueTheme()) },
+            { Theme.DarkYellowTheme, new ThemeEntity(Theme.DarkYellowTheme, new UI.Themes.DarkYellowTheme()) },
+            { Theme.DarkGreenTheme, new ThemeEntity(Theme.DarkGreenTheme, new UI.Themes.DarkGreenTheme()) },
+            { Theme.DarkVioletTheme, new ThemeEntity(Theme.DarkVioletTheme, new UI.Themes.DarkVioletTheme()) },
+            { Theme.DarkOrangeTheme, new ThemeEntity(Theme.DarkOrangeTheme, new UI.Themes.DarkOrangeTheme()) }
         };
 
 
@@ -50,15 +56,7 @@ namespace Sudoku.Services
         public static void SetTheme(Theme theme)        
         {
             DeleteOldTheme();
-            switch (theme)
-            {
-                case Theme.LightBlueTheme:
-                    Application.Current.Resources.MergedDictionaries.Add(new UI.Themes.LightBlueTheme());
-                    break;
-                case Theme.DarkBlueTheme:
-                    Application.Current.Resources.MergedDictionaries.Add(new UI.Themes.DarkBlueTheme());
-                    break;
-            }
+            Application.Current.Resources.MergedDictionaries.Add(_themes[theme].Dictionary);
             _themes[theme].IsSelected = true;
             App.Current.Properties[_propertyName] = theme.ToString();
             ColorManager.SetNavBarColor("NavBarColor");
@@ -83,12 +81,20 @@ namespace Sudoku.Services
     public enum Theme
     {
         LightBlueTheme,
-        DarkBlueTheme
+        LightYellowTheme,
+        LightRuddyTheme,
+        DarkBlueTheme,
+        DarkYellowTheme,
+        DarkGreenTheme,
+        DarkVioletTheme,
+        DarkOrangeTheme
     }
 
 
     public class ThemeEntity
     {
+        public ThemeEntity() { }
+
         public ThemeEntity(Theme theme, ResourceDictionary dictionary)
         {
             Theme = theme;

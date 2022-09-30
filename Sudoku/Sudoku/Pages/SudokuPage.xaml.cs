@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -19,6 +20,14 @@ namespace Sudoku.Pages
             InitializeComponent();
             _viewModel = new SudokuPageModel(difficulty);
             this.BindingContext = _viewModel;
+            _viewModel.WinEvent += Sudoku_Win;
+        }
+
+        private void Sudoku_Win(object sender, EventArgs e)
+        {
+            var animation = new Animation(v => collectionView.HeightRequest = v, collectionView.Height, 0);
+            collectionView.FadeTo(0, 400, Easing.CubicInOut);
+            animation.Commit(this, "winGameAnimation", length: 700, easing: Easing.CubicIn);
         }
 
         private void ContentPage_Appearing(object sender, EventArgs e)

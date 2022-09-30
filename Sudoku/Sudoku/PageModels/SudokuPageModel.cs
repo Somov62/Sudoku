@@ -15,9 +15,11 @@ namespace Sudoku.PageModels
         public Command SetNumberCommand { get; }
         public Command SetThemeCommand { get; }
 
+
         public SudokuPageModel(int difficulty)
         {
             Difficulty = difficulty;
+            WinState = true;
             SelectNumberCommand = new Command((object value) => SelectNumber(value));
             SetNumberCommand = new Command((object value) => SetNumber(value));
             SetThemeCommand = new Command((object value) => SetTheme(value));
@@ -48,8 +50,17 @@ namespace Sudoku.PageModels
             set => Set(ref _selectedNumber, value, nameof(SelectedNumber));
         }
 
+        public bool WinState { get; set; }
 
-        public List<ThemeEntity> Colors => ThemeManager.Themes;
+        public List<ThemeEntity> Colors
+        {
+            get
+            {
+                var themes = ThemeManager.Themes;
+                themes.Add(new ThemeEntity());
+                return themes;
+            }
+        }
 
         private void SelectNumber(object value)
         {
@@ -76,6 +87,8 @@ namespace Sudoku.PageModels
             SelectedNumber = number.Value;
         }
 
+        public event EventHandler WinEvent;
+
         private void SetTheme(object value)
         {
             ThemeEntity themeEntity = value as ThemeEntity;
@@ -84,7 +97,10 @@ namespace Sudoku.PageModels
         }
         private void Win()
         {
-            bool a = true;
+            SelectedNumber = 0;
+            WinState = false;
+            OnPropertyChanged(nameof(WinState));
+            WinEvent?.Invoke(null, null);
         }
 
 
@@ -97,7 +113,7 @@ namespace Sudoku.PageModels
 
         public async void CreateSudoku()
         {
-            await Task.Run(() => new SudokuLib.Sudoku(3)).ContinueWith(task => Sudoku = task.Result);
+            await Task.Run(() => new SudokuLib.Sudoku(difficultyLevel : Difficulty)).ContinueWith(task => Sudoku = task.Result);
         }
     }
 }

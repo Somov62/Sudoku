@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary
+    x:Class="Sudoku.UI.Themes.LightYellowTheme"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Color x:Key="MainBackgroundColor">#f9f9f9</Color>
+    <Color x:Key="MainForegroundColor">#7c7c7c</Color>
+
+    <Color x:Key="AccentColor">#aaa180</Color>
+    <Color x:Key="BorderColor">#dadada</Color>
+
+    <Color x:Key="GridBackgroundColor">#aaa180</Color>
+    <Color x:Key="GridForegroundColor">#9f9f9f</Color>
+
+    <Color x:Key="GridMainLineColor">#aaa180</Color>
+    <Color x:Key="GridSecLineColor">#d9d9d9</Color>
+
+    <Color x:Key="DefaultNumberBackgroundColor">#e7e7e7</Color>
+
+    <Color x:Key="NumberSelectedBackgroundColor">#aaa180</Color>
+    <Color x:Key="NumberSelectedForegroundColor">#f9f9f9</Color>
+
+    <Color x:Key="SettedNumberForegroundColor">#7a7a7a</Color>
+
+    <Color x:Key="NavBarColor">#f9f9f9</Color>
+    <Color x:Key="StatusBarColor">#f9f9f9</Color>
+</ResourceDictionary>

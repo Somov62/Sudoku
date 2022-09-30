@@ -3,26 +3,26 @@
     x:Class="Sudoku.UI.Themes.LightBlueTheme"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
-    
-    <Color x:Key="MainBackgroundColor">DarkBlue</Color>
-    <Color x:Key="MainForegroundColor">LightBlue</Color>
 
-    <Color x:Key="AccentColor">Aqua</Color>
-    <Color x:Key="BorderColor">LightBlue</Color>
+    <Color x:Key="MainBackgroundColor">#f9f9f9</Color>
+    <Color x:Key="MainForegroundColor">#828282</Color>
+
+    <Color x:Key="AccentColor">#759bb0</Color>
+    <Color x:Key="BorderColor">#d7d7d7</Color>
 
     <Color x:Key="GridBackgroundColor">CadetBlue</Color>
-    <Color x:Key="GridForegroundColor">LightBlue</Color>
+    <Color x:Key="GridForegroundColor">#a0a0a0</Color>
 
-    <Color x:Key="GridMainLineColor">Blue</Color>
-    <Color x:Key="GridSecLineColor">LIghtBlue</Color>
-    
-    <Color x:Key="DefaultNumberBackgroundColor">Cadetblue</Color>
-    
-    <Color x:Key="NumberSelectedBackgroundColor">Aqua</Color>
-    <Color x:Key="NumberSelectedForegroundColor">White</Color>
+    <Color x:Key="GridMainLineColor">#759bb0</Color>
+    <Color x:Key="GridSecLineColor">#dcdcdc</Color>
 
-    <Color x:Key="SettedNumberForegroundColor">LightBlue</Color>
+    <Color x:Key="DefaultNumberBackgroundColor">#e7e7e7</Color>
 
-    <Color x:Key="NavBarColor">DarkBlue</Color>
-    <Color x:Key="StatusBarColor">DarkBlue</Color>
+    <Color x:Key="NumberSelectedBackgroundColor">#759bb0</Color>
+    <Color x:Key="NumberSelectedForegroundColor">#dcdcdc</Color>
+
+    <Color x:Key="SettedNumberForegroundColor">#7e7e7e</Color>
+
+    <Color x:Key="NavBarColor">#f9f9f9</Color>
+    <Color x:Key="StatusBarColor">#f9f9f9</Color>
 </ResourceDictionary>

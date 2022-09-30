@@ -5,31 +5,33 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:fa="clr-namespace:Xamarin.Forms.FontAwesome.Controls;assembly=Xamarin.Forms.FontAwesome">
     <ContentView.Content>
-        <Grid
-            HorizontalOptions="FillAndExpand">
+        <Grid HorizontalOptions="FillAndExpand">
             <Frame
-                WidthRequest="0"
                 x:Name="contentFrame"
+                BackgroundColor="{DynamicResource MainBackgroundColor}"
+                WidthRequest="0"
                 VerticalOptions="Center"
                 HorizontalOptions="End"
-                Padding="10,10, 5, 10"
-                Margin="1, 1, 15, 1"
-                BorderColor="{DynamicResource BorderColor}"
-                BackgroundColor="{DynamicResource MainBackgroundColor}"
-                IsClippedToBounds="True"
-                CornerRadius="100">
-                <ContentView IsClippedToBounds="True" Content="{Binding ContentTemplate}" />
+                Margin="1,1,15,1"
+                Padding="10,10,5,10"
+                BorderColor="{DynamicResource AccentColor}"
+                CornerRadius="100"
+                HasShadow="False"
+                IsClippedToBounds="True">
+                <ContentView
+                    Content="{Binding ContentTemplate}"
+                    IsClippedToBounds="True" />
             </Frame>
             <Frame
-                HasShadow="False"
                 BackgroundColor="{DynamicResource MainBackgroundColor}"
-                BorderColor="{DynamicResource BorderColor}"
                 WidthRequest="52"
                 HeightRequest="52"
                 VerticalOptions="Center"
                 HorizontalOptions="End"
                 Padding="0"
-                CornerRadius="100">
+                BorderColor="{DynamicResource MainBackgroundColor}"
+                CornerRadius="100"
+                HasShadow="False">
                 <fa:Icon
                     TextColor="{DynamicResource AccentColor}"
                     FontSize="25"
@@ -40,8 +42,16 @@
                     <fa:Icon.GestureRecognizers>
                         <TapGestureRecognizer Tapped="Button_Tapped" />
                     </fa:Icon.GestureRecognizers>
-                    
+
                 </fa:Icon>
+                <Frame.Triggers>
+                    <DataTrigger
+                        Binding="{Binding IsOpened}"
+                        TargetType="Frame"
+                        Value="true">
+                        <Setter Property="BorderColor" Value="{DynamicResource AccentColor}" />
+                    </DataTrigger>
+                </Frame.Triggers>
             </Frame>
 
         </Grid>

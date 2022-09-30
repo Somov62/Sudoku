@@ -78,13 +78,14 @@ namespace Sudoku.UI.Controls
             OpenContent();
         }
 
-        public void CloseContent()
+        public async void CloseContent()
         {
             if (!IsOpened) return;
             
             contentFrame.WidthRequest = contentFrame.Width;
             var anim = new Animation(v => contentFrame.WidthRequest = v,start: contentFrame.Width, end: 10, Easing.CubicInOut);
             anim.Commit(this, "CloseContentAnimation", length:500);
+            await Task.Delay(510);
             IsOpened = false;
         }
         public void OpenContent()
