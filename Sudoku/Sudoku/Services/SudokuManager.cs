@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Sudoku.Services
 {
@@ -9,7 +6,7 @@ namespace Sudoku.Services
     {
         public static void SaveSudoku(SudokuLib.Sudoku sudoku)
         {
-
+            SudokuSaver.SaveSudoku(sudoku);
         }
 
         public static SudokuLib.Sudoku GetSave(int difficultyLevel)

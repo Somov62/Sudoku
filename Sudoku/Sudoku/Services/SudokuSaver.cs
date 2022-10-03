@@ -9,14 +9,15 @@ namespace Sudoku.Services
         {
             string data = JsonConvert.SerializeObject(sudoku);
 
-            DataStoreManager.SaveInProp(sudoku.Difficulty.ToString(), data);
+            DataStoreManager.SaveInProp("Sudoku" + sudoku.Difficulty.ToString(), data);
         }
         
         public static SudokuLib.Sudoku GetSave(int difficultyLevel)
         {
-            var data = DataStoreManager.GetFromProp(difficultyLevel.ToString());
+            var data = DataStoreManager.GetFromProp("Sudoku" + difficultyLevel.ToString());
             if (data == null) return null;
-            return data as SudokuLib.Sudoku;
+            string json = data.ToString();
+            return JsonConvert.DeserializeObject<SudokuLib.Sudoku>(json);
         }
 
     }

@@ -3,7 +3,6 @@ using SudokuLib.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Sudoku.PageModels
@@ -111,9 +110,9 @@ namespace Sudoku.PageModels
             Numbers = list;
         }
 
-        public async void CreateSudoku()
+        public void CreateSudoku()
         {
-            await Task.Run(() => new SudokuLib.Sudoku(difficultyLevel : Difficulty)).ContinueWith(task => Sudoku = task.Result);
+            Sudoku = SudokuManager.GetSave(Difficulty);
         }
     }
 }

@@ -16,7 +16,7 @@
     <!--<item name="colorAccent">#FF4081</item>-->
 	  <item name="android:windowLightStatusBar">true</item>
 	  <item name="android:overScrollMode">never</item>
-	  <item name="android:buttonStyle">@style/MyButton</item>
+	  <!--<item name="android:buttonStyle">@style/MyButton</item>-->
   </style>
 
 	

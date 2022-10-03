@@ -6,6 +6,7 @@ namespace SudokuLib
 {
     public class Sudoku
     {
+        public Sudoku() { }
         public Sudoku(int countChunksInDimension = 3, int difficultyLevel = 2)
         {
             Difficulty = difficultyLevel;
