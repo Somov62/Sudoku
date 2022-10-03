@@ -16,10 +16,10 @@ namespace SudokuLib
             ChunksArchiver archiver = new ChunksArchiver();
             Chunks = archiver.PackInChunks(Matrix);
         }
-        public int CountChunksInDimension { get; }
-        public int Difficulty { get; }
-        public int[,] Matrix { get; }
-        public List<Chunk> Chunks { get;  }
+        public int CountChunksInDimension { get; set; }
+        public int Difficulty { get; set; }
+        public int[,] Matrix { get;  }
+        public List<Chunk> Chunks { get; set; }
 
         public int FreeSeatsCount()
         {

@@ -64,42 +64,9 @@ namespace SudokuLib.GeneratorTools
                     if (SetNumber(item) == false) return null;
                 }
 
-                for (int i = 0; i < 9; i++)
-                {
-                    if (i % 3 == 0) Debug.WriteLine("");
-                    for (int j = 0; j < 9; j++)
-                    {
-                        if (j % 3 == 0) Debug.Write(" ");
-                        //if (matrix1[i, j] == 0)
-                        //{
-                        //    Console.Write(" ");
-                        //    continue;
-                        //}
-                        Debug.Write(_rawMatrixData[i, j]);
-                    }
-                    Debug.WriteLine("");
-                }
-
 
                 MatrixCleaner cleaner = new MatrixCleaner();
                 cleaner.DeleteNumbers(_rawMatrixData, difficultyLevel);
-
-                for (int i = 0; i < 9; i++)
-                {
-                    if (i % 3 == 0) Debug.WriteLine("");
-                    for (int j = 0; j < 9; j++)
-                    {
-                        if (j % 3 == 0) Debug.Write(" ");
-                        //if (matrix1[i, j] == 0)
-                        //{
-                        //    Console.Write(" ");
-                        //    continue;
-                        //}
-                        Debug.Write(_rawMatrixData[i, j]);
-                    }
-                    Debug.WriteLine("");
-                }
-
 
                 return _rawMatrixData;
             }
@@ -416,9 +383,5 @@ namespace SudokuLib.GeneratorTools
             firstVar = secondVar;
             secondVar = container;
         }
-
-       
-
-       
     }
 }

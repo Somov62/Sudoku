@@ -12,16 +12,13 @@ namespace Sudoku.PageModels
 
         public Command SelectNumberCommand { get; }
         public Command SetNumberCommand { get; }
-        public Command SetThemeCommand { get; }
 
 
         public SudokuPageModel(int difficulty)
         {
             Difficulty = difficulty;
-            WinState = true;
             SelectNumberCommand = new Command((object value) => SelectNumber(value));
             SetNumberCommand = new Command((object value) => SetNumber(value));
-            SetThemeCommand = new Command((object value) => SetTheme(value));
         }
 
         public int Difficulty { get; set; }
@@ -32,7 +29,6 @@ namespace Sudoku.PageModels
             get => _sudoku;
             set => Set(ref _sudoku, value, nameof(Sudoku));
         }
-
 
         private List<int> _numbers;
 
@@ -51,15 +47,6 @@ namespace Sudoku.PageModels
 
         public bool WinState { get; set; }
 
-        public List<ThemeEntity> Colors
-        {
-            get
-            {
-                var themes = ThemeManager.Themes;
-                themes.Add(new ThemeEntity());
-                return themes;
-            }
-        }
 
         private void SelectNumber(object value)
         {
@@ -80,7 +67,11 @@ namespace Sudoku.PageModels
                 number.Value = SelectedNumber;
                 if (Sudoku.FreeSeatsCount() == 0)
                 {
-                    if (Sudoku.Validate()) Win();
+                    if (Sudoku.Validate())
+                    {
+                        Win();
+                        return;
+                    }
                 }
             }
             SelectedNumber = number.Value;
@@ -88,16 +79,10 @@ namespace Sudoku.PageModels
 
         public event EventHandler WinEvent;
 
-        private void SetTheme(object value)
-        {
-            ThemeEntity themeEntity = value as ThemeEntity;
-
-            ThemeManager.SetTheme(themeEntity.Theme);
-        }
         private void Win()
         {
             SelectedNumber = 0;
-            WinState = false;
+            WinState = true;
             OnPropertyChanged(nameof(WinState));
             WinEvent?.Invoke(null, null);
         }

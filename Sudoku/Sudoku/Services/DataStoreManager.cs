@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System.Linq;
+using Xamarin.Forms;
 
 namespace Sudoku.Services
 {
@@ -12,7 +13,8 @@ namespace Sudoku.Services
 
         public static object GetFromProp(string propName)
         {
-            Application.Current.Resources.TryGetValue(propName, out object data);
+            var dictionarylist = Application.Current.Resources.MergedDictionaries;
+            dictionarylist.FirstOrDefault(p => p.GetType().ToString().Contains("Page1")).TryGetValue(propName, out object data);
             return data;
         }
 

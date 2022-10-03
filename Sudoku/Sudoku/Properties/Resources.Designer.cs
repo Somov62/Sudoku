@@ -22,7 +22,7 @@ namespace Sudoku.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Sudoku.Properties {
         ///   Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Sudoku.Properties.Resources", typeof(Resources).Assembly);
@@ -51,21 +51,12 @@ namespace Sudoku.Properties {
         ///   обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на {&quot;CountChunksInDimension&quot;:3,&quot;Difficulty&quot;:0,&quot;Matrix&quot;:[[5,2,8,3,7,4,6,9,1],[7,1,0,8,5,6,2,3,4],[6,4,3,0,9,0,7,5,8],[4,7,5,9,8,3,0,2,6],[1,0,6,5,2,7,8,4,9],[9,8,2,6,4,0,5,7,3],[0,6,4,7,3,5,9,1,2],[2,5,1,0,0,9,3,8,7],[3,9,7,2,1,8,4,6,5]],&quot;Chunks&quot;:[{&quot;ChunkData&quot;:[{&quot;Value&quot;:5,&quot;IsDefault&quot;:true},{&quot;Value&quot;:2,&quot;IsDefault&quot;:true},{&quot;Value&quot;:8,&quot;IsDefault&quot;:true},{&quot;Value&quot;:7,&quot;IsDefault&quot;:true},{&quot;Value&quot;:1,&quot;IsDefault&quot;:true},{&quot;Value&quot;:0,&quot;IsDefault&quot;:false},{&quot;Value&quot;:6,&quot;IsDefault&quot;:true},{&quot;Value&quot;:4,&quot;IsDefault&quot;:true},{&quot;Value&quot;:3,&quot;IsDefault [остаток строки не уместился]&quot;;.
-        /// </summary>
-        internal static string Sudoku0 {
-            get {
-                return ResourceManager.GetString("Sudoku0", resourceCulture);
             }
         }
     }

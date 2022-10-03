@@ -21,7 +21,7 @@
     <Color x:Key="NumberSelectedBackgroundColor">#759bb0</Color>
     <Color x:Key="NumberSelectedForegroundColor">#dcdcdc</Color>
 
-    <Color x:Key="SettedNumberForegroundColor">#7e7e7e</Color>
+    <Color x:Key="SettedNumberForegroundColor">#759bb0</Color>
 
     <Color x:Key="NavBarColor">#f9f9f9</Color>
     <Color x:Key="StatusBarColor">#f9f9f9</Color>

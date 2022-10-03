@@ -4,9 +4,16 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <Application.Resources>
-        <Style TargetType="NavigationPage">
-            <Setter Property="BarBackgroundColor" Value="{DynamicResource MainBackgroundColor}" />
-            <Setter Property="BarTextColor" Value="{DynamicResource MainForegroundColor}" />
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Properties/Page1.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="{DynamicResource MainBackgroundColor}" />
+                <Setter Property="BarTextColor" Value="{DynamicResource MainForegroundColor}" />
+            </Style>
+
+
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

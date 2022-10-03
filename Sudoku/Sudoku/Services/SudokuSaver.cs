@@ -15,8 +15,13 @@ namespace Sudoku.Services
         public static SudokuLib.Sudoku GetSave(int difficultyLevel)
         {
             var data = DataStoreManager.GetFromProp("Sudoku" + difficultyLevel.ToString());
-            if (data == null) return null;
-            string json = data.ToString();
+            string json;
+            if (data == null) 
+            {
+                return null;
+            }
+
+            json = data.ToString();
             return JsonConvert.DeserializeObject<SudokuLib.Sudoku>(json);
         }
 

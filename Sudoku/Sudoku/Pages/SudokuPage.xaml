@@ -15,73 +15,6 @@
         <converters:ColorButtonConverter x:Key="ColorButtonConverter" />
     </ContentPage.Resources>
 
-    <NavigationPage.TitleView>
-        <Grid>
-            <controls:Expander
-                HeightRequest="50"
-                VerticalOptions="FillAndExpand"
-                HorizontalOptions="End"
-                Margin="0,0,10,0">
-                <controls:Expander.ContentTemplate>
-                    <CollectionView
-                        ItemsSource="{Binding BindingContext.Colors, Source={Reference numberCV}}"
-                        BackgroundColor="{DynamicResource MainBackgroundColor}"
-                        HeightRequest="40"
-                        VerticalOptions="Center"
-                        ItemsUpdatingScrollMode="KeepScrollOffset">
-                        <CollectionView.ItemsLayout>
-                            <LinearItemsLayout
-                                ItemSpacing="10"
-                                Orientation="Horizontal" />
-                        </CollectionView.ItemsLayout>
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <Frame
-                                    BackgroundColor="{Binding MainColor}"
-                                    WidthRequest="28"
-                                    VerticalOptions="Center"
-                                    HorizontalOptions="Center"
-                                    Padding="0"
-                                    CornerRadius="100"
-                                    IsClippedToBounds="True">
-                                    <Frame
-                                        BackgroundColor="{Binding ColorAccent}"
-                                        WidthRequest="{Binding Height, Source={RelativeSource Mode=Self}}"
-                                        VerticalOptions="FillAndExpand"
-                                        HorizontalOptions="FillAndExpand"
-                                        Margin="7"
-                                        Padding="0"
-                                        CornerRadius="100"
-                                        InputTransparent="False"
-                                        IsClippedToBounds="True" >
-                                        <Frame.Triggers>
-                                            <DataTrigger TargetType="Frame" Binding="{Binding IsSelected}" Value="true">
-                                                <Setter Property="BackgroundColor" Value="{Binding MainColor}" />
-                                                <Setter Property="Margin" Value="4" />
-                                            </DataTrigger>
-                                        </Frame.Triggers>
-                                    </Frame>
-                                    <Frame.GestureRecognizers>
-                                        <TapGestureRecognizer
-                                            Command="{Binding BindingContext.SetThemeCommand, Source={Reference numberCV}}"
-                                            CommandParameter="{Binding}" />
-                                    </Frame.GestureRecognizers>
-                                    <Frame.Triggers>
-                                        <DataTrigger TargetType="Frame" Binding="{Binding IsSelected}" Value="true">
-                                            <Setter Property="BackgroundColor" Value="{Binding ColorAccent}" />
-                                        </DataTrigger>
-                                    </Frame.Triggers>
-                                </Frame>
-                                
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-
-                    </CollectionView>
-                </controls:Expander.ContentTemplate>
-            </controls:Expander>
-        </Grid>
-    </NavigationPage.TitleView>
-
     <ContentPage.Content>
 
         <Grid>
@@ -110,7 +43,7 @@
                                     x:Name="innerCV"
                                     ItemsSource="{Binding ChunkData}"
                                     WidthRequest="{Binding Height, Source={Reference numberCV}, Converter={StaticResource CollectionViewHeightConverter}}"
-                                    HeightRequest="{Binding Height, Source={Reference numberCV}, Converter={StaticResource CollectionViewHeightConverter}}"
+                                    HeightRequest="{Binding WidthRequest, Source={RelativeSource Mode=Self}}"
                                     VerticalOptions="Start"
                                     Margin="2,1,0,0">
                                     <CollectionView.ItemsLayout>
@@ -124,7 +57,7 @@
                                         <DataTemplate>
                                             <Grid
                                                 WidthRequest="{Binding Height, Source={Reference innerCV}, Converter={StaticResource CollectionViewHeightConverter}}"
-                                                HeightRequest="{Binding Height, Source={Reference innerCV}, Converter={StaticResource CollectionViewHeightConverter}}"
+                                                HeightRequest="{Binding WidthRequest, Source={RelativeSource Mode=Self}}"
                                                 VerticalOptions="Center"
                                                 HorizontalOptions="Center">
                                                 <Frame
@@ -133,9 +66,7 @@
                                                     HorizontalOptions="Center"
                                                     Margin="3"
                                                     Padding="0"
-                                                    CornerRadius="100"
-                                                    HasShadow="{Binding BindingContext.WinState, Source={Reference numberCV}}">
-
+                                                    CornerRadius="100">
                                                     <Button
                                                         x:Name="asasd"
                                                         Text=" "
@@ -145,7 +76,8 @@
                                                         HorizontalOptions="Center"
                                                         Padding="5,6,5,5"
                                                         Command="{Binding BindingContext.SetNumberCommand, Source={Reference numberCV}}"
-                                                        CommandParameter="{Binding}">
+                                                        CommandParameter="{Binding}"
+                                                        InputTransparent="{Binding BindingContext.WinState, Source={Reference numberCV}}">
                                                         <Button.Triggers>
                                                             <DataTrigger
                                                                 Binding="{Binding Value, Converter={StaticResource ColorButtonConverter}}"
@@ -191,6 +123,23 @@
                                                             </MultiTrigger>
                                                         </Button.Triggers>
                                                     </Button>
+                                                    <Frame.Triggers>
+
+
+                                                        <DataTrigger
+                                                            Binding="{Binding BindingContext.WinState, Source={Reference numberCV}}"
+                                                            TargetType="Frame"
+                                                            Value="true">
+                                                            <Setter Property="HasShadow" Value="false" />
+                                                        </DataTrigger>
+
+                                                        <DataTrigger
+                                                            Binding="{Binding IsDefault}"
+                                                            TargetType="Frame"
+                                                            Value="false">
+                                                            <Setter Property="HasShadow" Value="false" />
+                                                        </DataTrigger>
+                                                    </Frame.Triggers>
                                                 </Frame>
                                                 <Frame
                                                     BackgroundColor="{DynamicResource GridSecLineColor}"
