@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using SudokuLib.Entities;
+﻿using SudokuLib.Entities;
 using SudokuLib.GeneratorTools;
+using System.Collections.Generic;
 
 namespace SudokuLib
 {
@@ -10,15 +8,17 @@ namespace SudokuLib
     {
         public Sudoku(int countChunksInDimension = 3, int difficultyLevel = 2)
         {
+            Difficulty = difficultyLevel;
             CountChunksInDimension = countChunksInDimension;
             Matrix = new Generator().GenerateSudoku(CountChunksInDimension, difficultyLevel);
 
             ChunksArchiver archiver = new ChunksArchiver();
             Chunks = archiver.PackInChunks(Matrix);
         }
-        public int CountChunksInDimension { get; set; }
-        public int[,] Matrix { get; set; }
-        public List<Chunk> Chunks { get; set; }
+        public int CountChunksInDimension { get; }
+        public int Difficulty { get; }
+        public int[,] Matrix { get; }
+        public List<Chunk> Chunks { get;  }
 
         public int FreeSeatsCount()
         {
