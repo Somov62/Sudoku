@@ -99,5 +99,15 @@ namespace Sudoku.PageModels
         {
             Sudoku = SudokuManager.GetSave(Difficulty);
         }
+
+        public void OnDisappearing()
+        {
+            if (!WinState)
+            {
+                SudokuManager.SaveSudoku(Sudoku);
+                return;
+            }
+            SudokuManager.ClearSave(Difficulty);
+        }
     }
 }

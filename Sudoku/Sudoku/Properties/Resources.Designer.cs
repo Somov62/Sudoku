@@ -59,5 +59,50 @@ namespace Sudoku.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на {&quot;CountChunksInDimension&quot;:3,&quot;Difficulty&quot;:0,&quot;Matrix&quot;:[[5,2,8,3,7,4,6,9,1],[7,1,0,8,5,6,2,3,4],[6,4,3,0,9,0,7,5,8],[4,7,5,9,8,3,0,2,6],[1,0,6,5,2,7,8,4,9],[9,8,2,6,4,0,5,7,3],[0,6,4,7,3,5,9,1,2],[2,5,1,0,0,9,3,8,7],[3,9,7,2,1,8,4,6,5]],&quot;Chunks&quot;:[{&quot;ChunkData&quot;:[{&quot;Value&quot;:5,&quot;IsDefault&quot;:true},{&quot;Value&quot;:2,&quot;IsDefault&quot;:true},{&quot;Value&quot;:8,&quot;IsDefault&quot;:true},{&quot;Value&quot;:7,&quot;IsDefault&quot;:true},{&quot;Value&quot;:1,&quot;IsDefault&quot;:true},{&quot;Value&quot;:0,&quot;IsDefault&quot;:false},{&quot;Value&quot;:6,&quot;IsDefault&quot;:true},{&quot;Value&quot;:4,&quot;IsDefault&quot;:true},{&quot;Value&quot;:3,&quot;IsDefault [остаток строки не уместился]&quot;;.
+        /// </summary>
+        public static string Sudoku0 {
+            get {
+                return ResourceManager.GetString("Sudoku0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на {&quot;CountChunksInDimension&quot;:3,&quot;Difficulty&quot;:1,&quot;Matrix&quot;:[[9,0,1,7,0,6,3,4,5],[0,2,0,9,8,3,1,6,0],[7,6,0,4,5,1,0,2,9],[5,0,4,8,1,7,2,3,6],[6,1,0,2,3,9,5,7,4],[0,7,2,5,6,4,0,8,0],[8,0,9,3,7,5,6,0,2],[2,5,6,1,4,8,7,9,3],[1,3,0,6,9,0,0,5,8]],&quot;Chunks&quot;:[{&quot;ChunkData&quot;:[{&quot;Value&quot;:9,&quot;IsDefault&quot;:true},{&quot;Value&quot;:0,&quot;IsDefault&quot;:false},{&quot;Value&quot;:1,&quot;IsDefault&quot;:true},{&quot;Value&quot;:0,&quot;IsDefault&quot;:false},{&quot;Value&quot;:2,&quot;IsDefault&quot;:true},{&quot;Value&quot;:0,&quot;IsDefault&quot;:false},{&quot;Value&quot;:7,&quot;IsDefault&quot;:true},{&quot;Value&quot;:6,&quot;IsDefault&quot;:true},{&quot;Value&quot;:0,&quot;IsDefau [остаток строки не уместился]&quot;;.
+        /// </summary>
+        public static string Sudoku1 {
+            get {
+                return ResourceManager.GetString("Sudoku1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на {&quot;CountChunksInDimension&quot;:3,&quot;Difficulty&quot;:2,&quot;Matrix&quot;:[[6,0,7,0,4,0,1,0,0],[0,4,0,0,0,0,0,0,5],[5,1,8,0,0,0,3,2,4],[0,6,4,1,0,9,5,0,0],[0,0,5,0,0,2,9,4,1],[0,0,1,0,7,5,6,0,3],[8,3,9,0,5,7,4,1,6],[0,7,2,6,0,4,0,5,9],[4,5,6,9,0,8,2,3,0]],&quot;Chunks&quot;:[{&quot;ChunkData&quot;:[{&quot;Value&quot;:6,&quot;IsDefault&quot;:true},{&quot;Value&quot;:0,&quot;IsDefault&quot;:false},{&quot;Value&quot;:7,&quot;IsDefault&quot;:true},{&quot;Value&quot;:0,&quot;IsDefault&quot;:false},{&quot;Value&quot;:4,&quot;IsDefault&quot;:true},{&quot;Value&quot;:0,&quot;IsDefault&quot;:false},{&quot;Value&quot;:5,&quot;IsDefault&quot;:true},{&quot;Value&quot;:1,&quot;IsDefault&quot;:true},{&quot;Value&quot;:8,&quot;IsDefau [остаток строки не уместился]&quot;;.
+        /// </summary>
+        public static string Sudoku2 {
+            get {
+                return ResourceManager.GetString("Sudoku2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на {&quot;CountChunksInDimension&quot;:3,&quot;Difficulty&quot;:3,&quot;Matrix&quot;:[[0,7,2,9,8,5,4,0,6],[5,4,0,0,0,1,0,0,0],[6,0,9,0,0,7,5,0,0],[0,0,5,0,1,0,7,6,0],[7,2,4,0,0,0,0,0,0],[0,0,0,0,0,2,9,0,0],[0,0,0,0,6,0,8,0,1],[0,6,3,0,0,4,0,0,0],[2,0,0,0,5,0,0,0,4]],&quot;Chunks&quot;:[{&quot;ChunkData&quot;:[{&quot;Value&quot;:0,&quot;IsDefault&quot;:false},{&quot;Value&quot;:7,&quot;IsDefault&quot;:true},{&quot;Value&quot;:2,&quot;IsDefault&quot;:true},{&quot;Value&quot;:5,&quot;IsDefault&quot;:true},{&quot;Value&quot;:4,&quot;IsDefault&quot;:true},{&quot;Value&quot;:0,&quot;IsDefault&quot;:false},{&quot;Value&quot;:6,&quot;IsDefault&quot;:true},{&quot;Value&quot;:0,&quot;IsDefault&quot;:false},{&quot;Value&quot;:9,&quot;IsDefau [остаток строки не уместился]&quot;;.
+        /// </summary>
+        public static string Sudoku3 {
+            get {
+                return ResourceManager.GetString("Sudoku3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на {&quot;CountChunksInDimension&quot;:3,&quot;Difficulty&quot;:4,&quot;Matrix&quot;:[[0,0,0,0,8,0,0,0,0],[0,1,2,7,0,0,9,0,0],[0,0,0,0,0,0,0,0,1],[0,7,0,0,0,9,3,0,0],[3,0,0,0,0,2,7,0,6],[0,0,1,0,0,0,0,5,0],[0,0,0,0,4,7,5,6,0],[0,0,0,5,0,3,8,0,0],[8,0,0,0,9,0,0,0,0]],&quot;Chunks&quot;:[{&quot;ChunkData&quot;:[{&quot;Value&quot;:0,&quot;IsDefault&quot;:false},{&quot;Value&quot;:0,&quot;IsDefault&quot;:false},{&quot;Value&quot;:0,&quot;IsDefault&quot;:false},{&quot;Value&quot;:0,&quot;IsDefault&quot;:false},{&quot;Value&quot;:1,&quot;IsDefault&quot;:true},{&quot;Value&quot;:2,&quot;IsDefault&quot;:true},{&quot;Value&quot;:0,&quot;IsDefault&quot;:false},{&quot;Value&quot;:0,&quot;IsDefault&quot;:false},{&quot;Value&quot;:0,&quot;IsDe [остаток строки не уместился]&quot;;.
+        /// </summary>
+        public static string Sudoku4 {
+            get {
+                return ResourceManager.GetString("Sudoku4", resourceCulture);
+            }
+        }
     }
 }

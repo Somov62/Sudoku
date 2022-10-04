@@ -99,8 +99,6 @@
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
                 Margin="50,0,0,0"
-                StrokeLineCap="Round"
-                StrokeLineJoin="Round"
                 X1="0"
                 X2="0"
                 Y1="0"
@@ -112,7 +110,6 @@
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
                 Margin="0,0,50,0"
-                StrokeLineCap="Round"
                 X1="0"
                 X2="0"
                 Y1="0"
@@ -124,8 +121,6 @@
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
                 Margin="0,50,0,0"
-                StrokeLineCap="Round"
-                StrokeLineJoin="Round"
                 X1="0"
                 X2="150"
                 Y1="0"
@@ -136,8 +131,6 @@
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
                 Margin="0,0,0,50"
-                StrokeLineCap="Round"
-                StrokeLineJoin="Round"
                 X1="0"
                 X2="150"
                 Y1="0"
@@ -145,7 +138,8 @@
         </Grid>
 
 
-        <Grid Grid.Row="1">
+        <Grid
+            Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="auto" />
@@ -184,7 +178,7 @@
                 HeightRequest="40"
                 HorizontalOptions="Center"
                 Loop="False"
-                Position="{Binding Level}">
+                Position="{Binding Level, Mode=TwoWay, UpdateSourceEventName=PropertyChanged}">
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
                         <Label
@@ -200,19 +194,35 @@
 
 
         <StackLayout
+            Spacing="20"
             Grid.Row="2"
             Margin="0,20">
             <Button
+                x:Name="btnNewGame"
                 Text="New game"
                 TextColor="{DynamicResource MainForegroundColor}"
+                BackgroundColor="{DynamicResource MainBackgroundColor}"
                 FontSize="16"
                 HorizontalOptions="Center"
                 Padding="90,0"
-                BackgroundColor="{DynamicResource MainBackgroundColor}"
                 BorderColor="{DynamicResource BorderColor}"
                 BorderWidth="1"
-                Clicked="Button_Clicked"
+                Clicked="NewGame_Clicked"
                 CornerRadius="20"
+                TextTransform="None" />
+            <Button
+                Text="Resume"
+                TextColor="{DynamicResource MainForegroundColor}"
+                BackgroundColor="{DynamicResource MainBackgroundColor}"
+                FontSize="16"
+                WidthRequest="{Binding Path=Width, Source={Reference btnNewGame}}"
+                HorizontalOptions="Center"
+                Padding="90,0"
+                BorderColor="{DynamicResource BorderColor}"
+                BorderWidth="1"
+                Clicked="Resume_Clicked"
+                CornerRadius="20"
+                IsVisible="{Binding HasSave}"
                 TextTransform="None" />
         </StackLayout>
     </Grid>

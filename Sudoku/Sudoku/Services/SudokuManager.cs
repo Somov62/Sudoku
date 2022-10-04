@@ -6,21 +6,29 @@ namespace Sudoku.Services
     {
         public static void SaveSudoku(SudokuLib.Sudoku sudoku)
         {
-            SudokuSaver.SaveSudoku(sudoku);
+            SudokuSaver.Save(sudoku);
         }
 
         public static SudokuLib.Sudoku GetSave(int difficultyLevel)
         {
-            var sudoku = SudokuSaver.GetSave(difficultyLevel);
+            var sudoku = SudokuSaver.Get(difficultyLevel);
 
             Task.Run(() =>
             {
-                SudokuSaver.SaveSudoku(new SudokuLib.Sudoku(difficultyLevel: difficultyLevel));
+                SudokuSaver.SaveNew(new SudokuLib.Sudoku(difficultyLevel: difficultyLevel));
             });
 
             return sudoku;
-
         }
 
+        public static void LoadResumeSave(int difficultyLevel)
+        {
+            SudokuSaver.SaveNew(SudokuSaver.GetSave(difficultyLevel));
+        }
+
+        public static void ClearSave(int difficultyLevel)
+        {
+            SudokuSaver.ClearSave(difficultyLevel);
+        }
     }
 }

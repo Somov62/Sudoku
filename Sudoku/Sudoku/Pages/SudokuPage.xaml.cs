@@ -32,6 +32,7 @@ namespace Sudoku.Pages
 
         private void ContentPage_Appearing(object sender, EventArgs e)
         {
+            if (_viewModel.Sudoku != null) return;
             ConfigureTemplateSizes();
             CreateTemplate();
         }
@@ -53,6 +54,12 @@ namespace Sudoku.Pages
 
             collectionView.WidthRequest = DeviceDisplay.MainDisplayInfo.Width / DeviceDisplay.MainDisplayInfo.Density - 40;
             collectionView.HeightRequest = collectionView.WidthRequest / span * 2 + 6;
+        }
+
+        protected override void OnDisappearing()
+        {
+            _viewModel.OnDisappearing();
+            base.OnDisappearing();
         }
     }
 }

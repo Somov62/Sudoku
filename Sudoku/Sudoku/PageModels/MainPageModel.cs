@@ -25,8 +25,22 @@ namespace Sudoku.PageModels
         public int Level 
         {
             get => _level;
-            set => Set(ref _level, value, nameof(Level));
+            set
+            {
+                Set(ref _level, value, nameof(Level));
+                HasSave = SudokuSaver.SaveExists(_level);
+            }
         }
+
+        private bool _hasSave;
+
+        public bool HasSave
+        {
+            get => _hasSave;
+            set => Set(ref _hasSave, value, nameof(HasSave));
+        }
+
+
         private void SetTheme(object value)
         {
             ThemeEntity themeEntity = value as ThemeEntity;

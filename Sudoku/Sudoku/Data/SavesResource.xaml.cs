@@ -1,12 +1,12 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Sudoku.Properties
+namespace Sudoku.Data
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Page1 : ResourceDictionary
+    public partial class SavesResource : ResourceDictionary
     {
-        public Page1()
+        public SavesResource()
         {
             InitializeComponent();
         }

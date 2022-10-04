@@ -10,6 +10,7 @@ namespace Sudoku
         public App()
         {
             InitializeComponent();
+            Resources.MergedDictionaries.Add(new Data.SavesResource());
             ThemeManager.SetStartUpTheme();
             MainPage = new NavigationPage(new Pages.MainPage());
         }

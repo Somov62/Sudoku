@@ -221,7 +221,6 @@
                                         TextColor="{DynamicResource MainForegroundColor}"
                                         BackgroundColor="{DynamicResource MainBackgroundColor}"
                                         FontSize="{Binding Width, Source={RelativeSource Mode=Self}, Converter={StaticResource CollectionViewFontSizeConverter}}"
-                                        Margin="0,-5"
                                         BorderColor="{DynamicResource BorderColor}"
                                         Command="{Binding BindingContext.SelectNumberCommand, Source={Reference collectionView}}"
                                         CommandParameter="{Binding Text, Source={RelativeSource Mode=Self}}">
