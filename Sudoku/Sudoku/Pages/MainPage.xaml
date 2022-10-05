@@ -224,6 +224,18 @@
                 CornerRadius="20"
                 IsVisible="{Binding HasSave}"
                 TextTransform="None" />
+            <Label 
+                Text=" github link "
+                TextColor="{DynamicResource AccentColor}"
+                HorizontalOptions="Center"
+                TextDecorations="Underline"
+                FontSize="16"
+                Margin="0, 10">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Link_Click"/>
+                </Label.GestureRecognizers>
+            </Label>
+                
         </StackLayout>
     </Grid>
 </ContentPage>

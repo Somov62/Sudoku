@@ -33,5 +33,10 @@ namespace Sudoku.Pages
             SudokuManager.LoadResumeSave(_viewModel.Level);
             await this.Navigation.PushAsync(new SudokuPage(_viewModel.Level));
         }
+
+        private void Link_Click(object sender, EventArgs e)
+        {
+            Launcher.OpenAsync(new Uri("https://github.com/Somov62"));
+        }
     }
 }
