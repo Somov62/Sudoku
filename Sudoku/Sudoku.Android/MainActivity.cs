@@ -1,10 +1,9 @@
-﻿using System;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
-using Android.Runtime;
 using Android.OS;
+using Android.Runtime;
 using Android.Views;
+using AndroidX.AppCompat.App;
 
 namespace Sudoku.Droid
 {
@@ -16,10 +15,11 @@ namespace Sudoku.Droid
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
+            AppCompatDelegate.DefaultNightMode = AppCompatDelegate.ModeNightNo;
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            var uiOptions = SystemUiFlags.Visible | SystemUiFlags.ImmersiveSticky;
+            // var uiOptions = SystemUiFlags.LightNavigationBar | SystemUiFlags.LightStatusBar;
+            var uiOptions = SystemUiFlags.Visible;
           //SystemUiFlags.HideNavigation |
           //SystemUiFlags.LayoutHideNavigation |
           //SystemUiFlags.LayoutFullscreen |

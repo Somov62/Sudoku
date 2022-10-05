@@ -7,5 +7,9 @@
         void SetStatusBarColor(string hex);
 
         void SetTitleColor(string hex);
+
+        void SetLightBars();
+
+        void SetDarkBars();
     }
 }

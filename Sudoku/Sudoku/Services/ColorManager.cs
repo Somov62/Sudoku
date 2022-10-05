@@ -1,5 +1,4 @@
 ﻿using Sudoku.Interfaces;
-using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace Sudoku.Services
@@ -23,6 +22,16 @@ namespace Sudoku.Services
             string hex = GetHexColor(appResourceColorName);
             DependencyService.Get<IDeviceColorManager>().SetTitleColor(hex);
         }
+
+        public static void SetLightBars()
+        {
+            DependencyService.Get<IDeviceColorManager>().SetLightBars();
+        } 
+        public static void SetDarkBars()
+        {
+            DependencyService.Get<IDeviceColorManager>().SetDarkBars();
+        }
+
 
         private static string GetHexColor(string appResourceColorName)
         {

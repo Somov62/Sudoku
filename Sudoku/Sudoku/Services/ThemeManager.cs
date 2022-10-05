@@ -61,6 +61,12 @@ namespace Sudoku.Services
             App.Current.Properties[_propertyName] = theme.ToString();
             ColorManager.SetNavBarColor("NavBarColor");
             ColorManager.SetStatusBarColor("StatusBarColor");
+
+            if ((bool)App.Current.Resources["LightStatusBar"])
+            {
+                ColorManager.SetLightBars();
+            }
+            else ColorManager.SetDarkBars();
         }
 
         private static void DeleteOldTheme()

@@ -1,9 +1,5 @@
 ﻿using Sudoku.PageModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -23,11 +19,15 @@ namespace Sudoku.Pages
             _viewModel.WinEvent += Sudoku_Win;
         }
 
-        private void Sudoku_Win(object sender, EventArgs e)
+        private async void Sudoku_Win(object sender, EventArgs e)
         {
             var animation = new Animation(v => collectionView.HeightRequest = v, collectionView.Height, 0);
             collectionView.FadeTo(0, 400, Easing.CubicInOut);
             animation.Commit(this, "winGameAnimation", length: 700, easing: Easing.CubicIn);
+            await Task.Delay(800);
+            backMenuContainer.FadeTo(1, length: 450, easing: Easing.CubicInOut);
+            await Task.Delay(450);
+            backMenuContainer.InputTransparent = false;
         }
 
         private void ContentPage_Appearing(object sender, EventArgs e)
@@ -60,6 +60,11 @@ namespace Sudoku.Pages
         {
             _viewModel.OnDisappearing();
             base.OnDisappearing();
+        }
+
+        private async void BackToMenu_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
         }
     }
 }

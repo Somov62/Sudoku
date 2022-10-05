@@ -1,8 +1,5 @@
-﻿using Sudoku.PageModels;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Globalization;
-using System.Text;
 using Xamarin.Forms;
 
 namespace Sudoku.UI.Converters

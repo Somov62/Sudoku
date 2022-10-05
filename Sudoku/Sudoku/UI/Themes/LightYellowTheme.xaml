@@ -25,4 +25,7 @@
 
     <Color x:Key="NavBarColor">#f9f9f9</Color>
     <Color x:Key="StatusBarColor">#f9f9f9</Color>
+
+    <x:Boolean x:Key="LightStatusBar">true</x:Boolean>
+
 </ResourceDictionary>

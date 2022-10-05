@@ -1,6 +1,7 @@
 ﻿using Sudoku.PageModels;
 using Sudoku.Services;
 using System;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Sudoku.Pages

@@ -17,14 +17,14 @@
     </ContentPage.Resources>
 
     <NavigationPage.TitleView>
-        <Label 
-            Margin="-65,0,0,0"
+        <Label
             Text="{Binding Path=BindingContext.ElapsedSeconds, Source={Reference numberCV}, Converter={StaticResource TimerValueConverter}}"
-               HorizontalOptions="Center"
-               VerticalOptions="Center"
-               TextColor="{DynamicResource MainForegroundColor}"/>
+            TextColor="{DynamicResource MainForegroundColor}"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            Margin="-65,0,0,0" />
     </NavigationPage.TitleView>
-    
+
 
     <ContentPage.Content>
 
@@ -86,6 +86,7 @@
                                                         VerticalOptions="Center"
                                                         HorizontalOptions="Center"
                                                         Padding="5,6,5,5"
+                                                        BorderColor="Transparent"
                                                         Command="{Binding BindingContext.SetNumberCommand, Source={Reference numberCV}}"
                                                         CommandParameter="{Binding}"
                                                         InputTransparent="{Binding BindingContext.WinState, Source={Reference numberCV}}">
@@ -135,8 +136,6 @@
                                                         </Button.Triggers>
                                                     </Button>
                                                     <Frame.Triggers>
-
-
                                                         <DataTrigger
                                                             Binding="{Binding BindingContext.WinState, Source={Reference numberCV}}"
                                                             TargetType="Frame"
@@ -198,6 +197,7 @@
                 Grid.Row="1"
                 VerticalOptions="End"
                 Margin="0,0,0,20">
+
                 <CollectionView
                     x:Name="collectionView"
                     ItemsSource="{Binding Numbers}"
@@ -257,6 +257,30 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
+
+                <StackLayout
+                    x:Name="backMenuContainer"
+                    VerticalOptions="End"
+                    HorizontalOptions="FillAndExpand"
+                    InputTransparent="True"
+                    Opacity="0">
+                    <Label
+                        Text="Great!"
+                        FontSize="16"
+                        HorizontalOptions="Center"
+                        />
+                    <Button
+                        Text="Back to menu"
+                        TextColor="{DynamicResource MainForegroundColor}"
+                        BackgroundColor="{DynamicResource MainBackgroundColor}"
+                        FontSize="16"
+                        Margin="30,10"
+                        BorderColor="{DynamicResource BorderColor}"
+                        BorderWidth="1"
+                        Clicked="BackToMenu_Clicked"
+                        CornerRadius="20"
+                        TextTransform="None" />
+                </StackLayout>
             </Grid>
         </Grid>
 
