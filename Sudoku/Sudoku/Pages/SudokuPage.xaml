@@ -13,7 +13,18 @@
         <converters:CollectionViewHeightConverter x:Key="CollectionViewHeightConverter" />
         <converters:CollectionViewFontSizeConverter x:Key="CollectionViewFontSizeConverter" />
         <converters:ColorButtonConverter x:Key="ColorButtonConverter" />
+        <converters:TimerValueConverter x:Key="TimerValueConverter" />
     </ContentPage.Resources>
+
+    <NavigationPage.TitleView>
+        <Label 
+            Margin="-65,0,0,0"
+            Text="{Binding Path=BindingContext.ElapsedSeconds, Source={Reference numberCV}, Converter={StaticResource TimerValueConverter}}"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               TextColor="{DynamicResource MainForegroundColor}"/>
+    </NavigationPage.TitleView>
+    
 
     <ContentPage.Content>
 

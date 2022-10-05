@@ -24,7 +24,11 @@ namespace Sudoku.Services
         public static SudokuLib.Sudoku Get(int difficultyLevel)
         {
             var data = DataStoreManager.GetFromProp(_propName + difficultyLevel.ToString());
-            if (data == null) return null;
+            if (data == null)
+            {
+                Data.SavesResource saves = new Data.SavesResource();
+                saves.TryGetValue(_propName + difficultyLevel.ToString(), out data);
+            }
             return JsonConvert.DeserializeObject<SudokuLib.Sudoku>(data.ToString());
         }
 

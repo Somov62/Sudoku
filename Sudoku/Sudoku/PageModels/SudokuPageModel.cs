@@ -9,6 +9,7 @@ namespace Sudoku.PageModels
 {
     public class SudokuPageModel : Base.BaseViewModel
     {
+        private readonly System.Timers.Timer _timer;
 
         public Command SelectNumberCommand { get; }
         public Command SetNumberCommand { get; }
@@ -16,9 +17,16 @@ namespace Sudoku.PageModels
 
         public SudokuPageModel(int difficulty)
         {
+            _timer = new System.Timers.Timer(1000);
+            _timer.Elapsed += Timer_Elapsed;
             Difficulty = difficulty;
             SelectNumberCommand = new Command((object value) => SelectNumber(value));
             SetNumberCommand = new Command((object value) => SetNumber(value));
+        }
+
+        private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            ElapsedSeconds++;
         }
 
         public int Difficulty { get; set; }
@@ -43,6 +51,14 @@ namespace Sudoku.PageModels
         {
             get => _selectedNumber;
             set => Set(ref _selectedNumber, value, nameof(SelectedNumber));
+        }
+
+        private int _elapsedSeconds;
+
+        public int ElapsedSeconds
+        {
+            get => _elapsedSeconds;
+            set => Set(ref _elapsedSeconds, value, nameof(ElapsedSeconds));
         }
 
         public bool WinState { get; set; }
@@ -75,12 +91,14 @@ namespace Sudoku.PageModels
                 }
             }
             SelectedNumber = number.Value;
+            if (!_timer.Enabled) _timer.Start();
         }
 
         public event EventHandler WinEvent;
 
         private void Win()
         {
+            _timer.Stop();
             SelectedNumber = 0;
             WinState = true;
             OnPropertyChanged(nameof(WinState));
