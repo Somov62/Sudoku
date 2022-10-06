@@ -46,7 +46,7 @@ namespace Sudoku.Services
             App.Current.Properties.TryGetValue(_propertyName, out object property);
             if (!Enum.TryParse(property?.ToString(), out Theme theme))
             {
-                theme = Theme.LightBlueTheme;
+                theme = Theme.DarkVioletTheme;
                 App.Current.Properties[_propertyName] = theme.ToString();
             }
             SetTheme(theme);
