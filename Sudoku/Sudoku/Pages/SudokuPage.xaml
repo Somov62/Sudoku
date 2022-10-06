@@ -266,9 +266,9 @@
                     Opacity="0">
                     <Label
                         Text="Great!"
+                        TextColor="{DynamicResource MainForegroundColor}"
                         FontSize="16"
-                        HorizontalOptions="Center"
-                        />
+                        HorizontalOptions="Center" />
                     <Button
                         Text="Back to menu"
                         TextColor="{DynamicResource MainForegroundColor}"

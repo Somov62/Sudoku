@@ -11,7 +11,7 @@ namespace Sudoku.UI.Converters
         {
             int time = (int)value;
             int hours = time / 3600;
-            int minutes = time / 60;
+            int minutes = time % 3600 / 60;
             int seconds = time % 60;
             StringBuilder result = new StringBuilder();
             if (hours > 0)
