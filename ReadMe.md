@@ -11,18 +11,18 @@
 - Прекрасный интерфейс приложения, выполненный в **минималистичном стиле**.
 
 ## Немного скриншотов:
-
-<div style="text-align: center;">
-<img src="Screenshots\LightBlueTheme.jpg" style="zoom:25%; margin: 0 auto;" ></img>
-<img  src="Screenshots\DarkOrangeTheme.jpg" style="zoom:25%; margin: 0 auto;"></img>
-<img src="Screenshots\DarkVioletTheme.jpg" style="zoom:25%; margin: 0 auto;"></img>
-</div>
-<div style="text-align: center;">
-<img src="Screenshots\DarkBlueTheme.jpg" style="zoom:25%; margin: 0 auto;" ></img>
-<img  src="Screenshots\LigthRedTheme.jpg" style="zoom:25%; margin: 0 auto;"></img>
-<img src="Screenshots\LightYellowTheme.jpg" style="zoom:25%; margin: 0 auto;"></img>
-</div>
-
+<table >
+<tr>
+<td><img src="Screenshots\LightBlueTheme.jpg" style="zoom:25%; margin: 0 auto;" ></img></td>
+<td><img src="Screenshots\DarkOrangeTheme.jpg" style="zoom:25%; margin: 0 auto;"></img></td>
+<td><img src="Screenshots\DarkVioletTheme.jpg" style="zoom:25%; margin: 0 auto;"></img></td>
+</tr>
+<tr>
+<td><img src="Screenshots\DarkBlueTheme.jpg" style="zoom:25%; margin: 0 auto;" ></img></td>
+<td><img src="Screenshots\LigthRedTheme.jpg" style="zoom:25%; margin: 0 auto;"></img></td>
+<td><img src="Screenshots\LightYellowTheme.jpg" style="zoom:25%; margin: 0 auto;"></img></td>
+</tr>
+</table>
 
 ## Установка:
 Посмотрите [страницу релизов](https://github.com/Somov62/Sudoku/releases) с выпущенными версиями и последними изменениями.
